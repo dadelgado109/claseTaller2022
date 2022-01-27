@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+	<title>Etiquetas HTML</title>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	
+</head>
+
+<body>
+	<nav class="green darken-2" role="navigation">
+		<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="#">Navbar Link</a></li>
+			</ul>
+
+			<ul id="nav-mobile" class="side-nav">
+				<li><a href="#">Navbar Link</a></li>
+			</ul>
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+		</div>
+	</nav>
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
+			<br><br>
+			<h1 class="header center green-text">Etiquetas HTML</h1>
+			<div class="row center">
+				<h5 class="header col s12 light">Listado etiquetas HTML</h5>
+			</div>
+			<br><br>
+
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="section">
+
+			<!--   Icon Section   -->
+			<table class="striped">
+				<thead id="html-raiz">
+					<tr>
+						<th width="300">Etiquetas</th>
+						<th width="300">Descripci&#243;n</th>
+						<th width="300">Propiedades</th>
+					</tr>
+				</thead>
+				<tbody id="html-raiz">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Elemento raíz</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>!DOCTYPE</td>
+						<td>tipo de documento (versión de html empleada)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>html</td>
+						<td>engloba todo el documento</td>
+						<td>lang</td>
+					</tr>
+					<tr>
+						<td>&lt;!-- ... --&gt;</td>
+						<td>comentario (sólo visible en el código fuente) </td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tbody id="html-metadatos">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Metadatos del documento </td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>head</td>
+						<td>delimita el encabezado del documento</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>title</td>
+						<td>título del documento (se muestra en la pestaña del navegador)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>base</td>
+						<td>URI base para direcciones relativas</td>
+						<td>href, target</td>
+					</tr>
+					<tr>
+						<td>link</td>
+						<td>enlace a otros archivos (hoja de estilo, etc.)</td>
+						<td>href, rel, media, type, title</td>
+					</tr>
+					<tr>
+						<td>meta</td>
+						<td>metainformación sobre el documento</td>
+						<td>name, content, charset</td>
+					</tr>
+					<tr>
+						<td>style</td>
+						<td>hoja de estilo incluida en el documento</td>
+						<td>type, title</td>
+					</tr>
+				</tbody>
+				<tbody id="html-secciones">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Secciones</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>body</td>
+						<td>delimita el cuerpo del documento</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>article</td>
+						<td>artículo</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>section</td>
+						<td>sección</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>nav</td>
+						<td>navegación</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>aside</td>
+						<td>lateral</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>h1 a h6</td>
+						<td>encabezado (de nivel 1 a 6)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>hgroup</td>
+						<td>grupo de encabezados</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>header</td>
+						<td>cabecera</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>footer</td>
+						<td>pie</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>address</td>
+						<td>dirección (información sobre el autor)</td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tbody id="html-contenido">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Bloques de contenido</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>p</td>
+						<td>párrafo</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>hr</td>
+						<td>separador</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>div</td>
+						<td>división</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>blockquote</td>
+						<td>cita larga (que incluye varios párrafos)</td>
+						<td>cite</td>
+					</tr>
+					<tr>
+						<td>pre</td>
+						<td>texto preformateado</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>main</td>
+						<td>principal</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>figure</td>
+						<td>ilustración</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>figcaption</td>
+						<td>pie de ilustración</td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tbody id="html-texto">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Texto (en línea)</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>br</td>
+						<td>salto de línea</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>wbr</td>
+						<td>posible salto de línea</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>a</td>
+						<td>hiperenlace</td>
+						<td>href, target, download, rel, type</td>
+					</tr>
+					<tr>
+						<td>span</td>
+						<td>contenedor de texto genérico</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>strong</td>
+						<td>importante</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>em</td>
+						<td>énfasis</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>sub</td>
+						<td>subíndice</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>sup</td>
+						<td>superíndice</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>abbr</td>
+						<td>abreviatura</td>
+						<td>title</td>
+					</tr>
+					<tr>
+						<td>b</td>
+						<td>atención</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>cite</td>
+						<td>obra</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>data</td>
+						<td>datos</td>
+						<td>value</td>
+					</tr>
+					<tr>
+						<td>dfn</td>
+						<td>definición</td>
+						<td>title</td>
+					</tr>
+					<tr>
+						<td>kbd</td>
+						<td>teclado</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>i</td>
+						<td>tecnicismo</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>mark</td>
+						<td>resaltado añadido posteriormente, no en el original</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>q</td>
+						<td>cita </td>
+						<td>cite</td>
+					</tr>
+					<tr>
+						<td>s</td>
+						<td>incorrecto</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>small</td>
+						<td>comentario</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>time</td>
+						<td>fecha y hora</td>
+						<td>datetime</td>
+					</tr>
+					<tr>
+						<td>u</td>
+						<td>sonido inarticulado</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>code</td>
+						<td>código (de programa de ordenador)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>samp/td>
+						<td>salida (de programa de ordenador)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>var</td>
+						<td>variable (de programa de ordenador)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>bdo</td>
+						<td>dirección de escritura</td>
+						<td>dir</td>
+					</tr>
+					<tr>
+						<td>bdi</td>
+						<td>ignorar dirección de escritura</td>
+						<td>dir</td>
+					</tr>
+				</tbody>
+				<tbody id="html-modificacion">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Modificaciones</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>ins</td>
+						<td>texto insertado</td>
+						<td>cite, datetime</td>
+					</tr>
+					<tr>
+						<td>del</td>
+						<td>texto borrado</td>
+						<td>cite, datetime</td>
+					</tr>
+				</tbody>
+				<tbody id="html-incrustado">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Contenido incrustado</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>picture</td>
+						<td>imagen múltiple para diferentes resoluciones o densidades</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>img</td>
+						<td>imagen</td>
+						<td>alt, src, usemap, ismap, width, height</td>
+					</tr>
+					<tr>
+						<td>iframe</td>
+						<td>marco incrustado en el documento</td>
+						<td>src, srcdoc, name, sandbox, width, height</td>
+					</tr>
+					<tr>
+						<td>embed</td>
+						<td></td>
+						<td>src, type, width, height</td>
+					</tr>
+					<tr>
+						<td>object</td>
+						<td>objeto</td>
+						<td>data, type, width, height</td>
+					</tr>
+					<tr>
+						<td>param/td>
+						<td>parámetro para &lt;objeto&gt;</td>
+						<td>name, value</td>
+					</tr>
+					<tr>
+						<td>video</td>
+						<td></td>
+						<td>src, poster, preload, autoplay, loop, muted, controls, width, height
+						</td>
+					</tr>
+					<tr>
+						<td>audio</td>
+						<td></td>
+						<td>src, preload, autoplay, loop, muted, controls</td>
+					</tr>
+					<tr>
+						<td>source</td>
+						<td>origen de &lt;img&gt;, &lt;audio&gt; o &lt;video&gt;</td>
+						<td>src, type</td>
+					</tr>
+					<tr>
+						<td>track</td>
+						<td></td>
+						<td>kind, src, srclang, label, default</td>
+					</tr>
+					<tr>
+						<td>map</td>
+						<td>mapa de imagen</td>
+						<td>name</td>
+					</tr>
+					<tr>
+						<td>area</td>
+						<td>área en mapa de imagen</td>
+						<td>alt, coords, href, hreflang, rel, shape, target, type</td>
+					</tr>
+				</tbody>
+				<tbody id="html-listas">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Listas (bloque de contenido)</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>ol</td>
+						<td>lista ordenada</td>
+						<td>reversed, start, type</td>
+					</tr>
+					<tr>
+						<td>ul</td>
+						<td>lista no ordenada</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>menu</td>
+						<td>equivale a ul</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>li</td>
+						<td>elemento de lista (ordenada o no ordenada)</td>
+						<td>value</td>
+					</tr>
+					<tr>
+						<td>dl</td>
+						<td>lista de definición</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>dt</td>
+						<td>término en lista de definición</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>dd</td>
+						<td>definición en lista de definición</td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tbody id="html-tablas">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Tablas</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>table</td>
+						<td>tabla</td>
+						<td>border</td>
+					</tr>
+					<tr>
+						<td>caption</td>
+						<td>leyenda de tabla</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>colgroup</td>
+						<td>grupo de columnas</td>
+						<td>span</td>
+					</tr>
+					<tr>
+						<td>tbody</td>
+						<td>cuerpo de tabla (grupo de filas)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>thead</td>
+						<td>cabecera de tabla (grupo de filas)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>tfoot</td>
+						<td>pie de tabla (grupo de filas)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>tr</td>
+						<td>fila</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>td</td>
+						<td>celda</td>
+						<td>colspan, rowspan, headers</td>
+					</tr>
+					<tr>
+						<td>th</td>
+						<td>celda de cabecera</td>
+						<td>colspan, rowspan, headers, scope, abbr</td>
+					</tr>
+					<tr>
+						<td>col</td>
+						<td>columna</td>
+						<td>span</td>
+					</tr>
+				</tbody>
+				<tbody id="html-formularios">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Formularios</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>form</td>
+						<td>formulario</td>
+						<td>accept-charset, action, autocomplete, enctype, method, target</td>
+					</tr>
+					<tr>
+						<td>label</td>
+						<td>etiqueta de un control</td>
+						<td>form, for</td>
+					</tr>
+					<tr>
+						<td>input</td>
+						<td>control (hay varios tipos)</td>
+						<td>type
+							(submit,
+							reset,
+							button,
+							text,
+							password,
+							number,
+							search,tel,	url,email,date,time,color,range,
+							file,
+							image,
+							hidden, etc.), name, value, checked,
+							selected, width, height, size, maxlength, ...
+						</td>
+					</tr>
+					<tr>
+						<td>button</td>
+						<td>botón</td>
+						<td>name, type (submit,
+							reset,
+							button), value, form
+						</td>
+					</tr>
+					<tr>
+						<td>select</td>
+						<td>caja de lista</td>
+						<td>name, multiple, size, ...</td>
+					</tr>
+					<tr>
+						<td>datalist</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>optgroup</td>
+						<td>grupo de opciones en una caja de lista</td>
+						<td>label</td>
+					</tr>
+					<tr>
+						<td>option</td>
+						<td>opción de caja de lista</td>
+						<td>label, selected, value</td>
+					</tr>
+					<tr>
+						<td>textarea</td>
+						<td>área de texto</td>
+						<td>name, cols, rows, ...</td>
+					</tr>
+					<tr>
+						<td>output</td>
+						<td>cálculo</td>
+						<td>name, for</td>
+					</tr>
+					<tr>
+						<td>progress</td>
+						<td>barra de progreso</td>
+						<td>value, max</td>
+					</tr>
+					<tr>
+						<td>meter</td>
+						<td>indicador</td>
+						<td>value, min, max, low, high, optimum</td>
+					</tr>
+					<tr>
+						<td>fieldset</td>
+						<td>grupo de controles</td>
+						<td>name, disabled</td>
+					</tr>
+					<tr>
+						<td>legend</td>
+						<td>leyenda de grupo de controles</td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tbody id="html-interactivos">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Elementos interactivos</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>details</td>
+						<td>desplegable</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>summary</td>
+						<td>leyenda para &lt;details&gt;</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>dialog</td>
+						<td>cuadro de diálogo de una aplicación</td>
+						<td>open</td>
+					</tr>
+				</tbody>
+				<tbody id="html-scripts">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Scripts</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>script</td>
+						<td>script</td>
+						<td>src, type, charset, async, defer</td>
+					</tr>
+					<tr>
+						<td>noscript</td>
+						<td>contenido a mostrar en navegadores que no admiten &lt;script&gt;</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>template</td>
+						<td>plantillas utilizables por scripts</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>slot</td>
+						<td>marcador para componente</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>canvas</td>
+						<td>zona de dibujo utilizable por script</td>
+						<td>width, height</td>
+					</tr>
+				</tbody>
+				<tbody id="html-ruby">
+					<tr class="card-panel green lighten-2">
+						<td colspan="3">Notación Ruby (texto en línea)</td>
+					</tr>
+					<tr class="cabecera">
+						<td>Etiqueta</td>
+						<td>Descripción</td>
+						<td>Atributos principales</td>
+					</tr>
+					<tr>
+						<td>ruby</td>
+						<td>notación ruby</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>rt</td>
+						<td>elemento de notación ruby (texto)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>rp</td>
+						<td>elemento de notación ruby (paréntesis)</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<br><br>
+	</div>
+
+	<footer class="page-footer green darken-2">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Company Bio</h5>
+					<p class="grey-text text-lighten-4">We are a team of college students working on this project like
+						it's our full time job. Any amount would help support and continue development on this project
+						and is greatly appreciated.</p>
+
+
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Settings</h5>
+					<ul>
+						<li><a class="white-text" href="#!">Link 1</a></li>
+						<li><a class="white-text" href="#!">Link 2</a></li>
+						<li><a class="white-text" href="#!">Link 3</a></li>
+						<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Connect</h5>
+					<ul>
+						<li><a class="white-text" href="#!">Link 1</a></li>
+						<li><a class="white-text" href="#!">Link 2</a></li>
+						<li><a class="white-text" href="#!">Link 3</a></li>
+						<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+			</div>
+		</div>
+	</footer>
+
+
+	<!--  Scripts-->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+
+</body>
+
+</html>

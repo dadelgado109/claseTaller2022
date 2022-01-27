@@ -1,31 +1,129 @@
+
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<title>Soy Html</title>
+		<title>Soy Html con tablas</title>
 		<meta name="description" content="Soy HTML MUY importante;El Mas importate del todos"/>
 		<meta name="keywords" content="Importante, Yo Importante, Tu Importante"/>
 		<meta name="author" content="Damian Delgado" />
 		<meta name="copyright" content="Licencia GPL" />
-		<meta name="copyright" content="Licencia GPL" />
 		<meta name="robots" content="index"/>
+
+		<style>
+			.test{
+				background-color: brown;
+			}
+		</style>
 	</head>
 	<bod>
-		<header>
-			header  
-		</header>
 		<nav>
 			Nav
 		</nav>
+		<header>
+			header  
+		</header>
 		<aside>
 			Aside
 		</aside>
 		<section>
-			<div style="border:double;">
+			<div class="test">
 				Soy un Div dentro la seccion 
 			</div>
 			Section
+			<table style="border:solid;" width="50%">
+				<thead>
+					<th>
+						Nombre
+					</th>
+					<th>
+						Apellido
+					</th>
+					<th>
+						Edad
+					</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							Damian
+						</td>
+						<td>
+							Delgado
+						</td>
+						<td>
+							34
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Nicolas 
+						</td>
+						<td>
+							Alonzo
+						</td>
+						<td>
+							33
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Diego 
+						</td>
+						<td>
+							Godin
+						</td>
+						<td>
+							36
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Federico 
+						</td>
+						<td>
+							Valverde
+						</td>
+						<td>
+							24
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+				</tfoot>
+			</table>
 		</section>
-		<footer>
+		<section>
+			<br>
+			<br>
+			<br>
+			<!--
+				GET = Envia la informacion del formulario por la !!!! URL !!!!!
+				POST = Envia la informacion del formulario !!!!! OCULTA !!!!!				
+			-->
+			<div>
+				<form action="completo.html" method="GET">
+					<input type="text" name="nombre" />
+					<select name="pais">
+						<option>
+							Uruguay
+						</option>
+						<option>
+							Brasil
+						</option>
+						<option>
+							Argentina
+						</option>
+					</select>
+					<textarea  name="descripcion">
+	
+					</textarea>
+					<button type="submit">Enviar</button>
+				</form>
+
+			</div>
+			
+		</section>
+		<footer class="test">
 			footer
 		</footer>
 	</bod>
