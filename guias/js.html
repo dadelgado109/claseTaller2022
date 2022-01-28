@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+	<title>Etiquetas HTML</title>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	
+</head>
+
+<body>
+	<nav class="green darken-2" role="navigation">
+		<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="#">Navbar Link</a></li>
+			</ul>
+
+			<ul id="nav-mobile" class="side-nav">
+				<li><a href="#">Navbar Link</a></li>
+			</ul>
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+		</div>
+	</nav>
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
+			<br><br>
+			<h1 class="header center green-text">Eventos JS</h1>
+			<div class="row center">
+				<h5 class="header col s12 light">Listado eventos JS</h5>
+			</div>
+			<br><br>
+
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="section">
+
+			<!--   Icon Section   -->
+			
+			<table class="striped">
+				<thead>
+					<tr class="card-panel green lighten-2">
+						<th>Evento</th>
+						<th>Descripción</th>
+						<th>Elementos para los que está definido</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>onblur</code></td>
+						<td>Un elemento pierde el foco</td>
+						<td><code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;body&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onchange</code></td>
+						<td>Un elemento ha sido modificado</td>
+						<td><code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onclick</code></td>
+						<td>Pulsar y soltar el ratón</td>
+						<td>Todos los elementos</td>
+					</tr>
+					<tr>
+						<td><code>ondblclick</code></td>
+						<td>Pulsar dos veces seguidas con el ratón</td>
+						<td>Todos los elementos</td>
+					</tr>
+					<tr>
+						<td><code>onfocus</code></td>
+						<td>Un elemento obtiene el foco</td>
+						<td><code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;body&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onkeydown</code></td>
+						<td>Pulsar una tecla y no soltarla</td>
+						<td>Elementos de formulario y <code>&lt;body&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onkeypress</code></td>
+						<td>Pulsar una tecla</td>
+						<td>Elementos de formulario y <code>&lt;body&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onkeyup</code></td>
+						<td>Soltar una tecla pulsada</td>
+						<td>Elementos de formulario y <code>&lt;body&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onload</code></td>
+						<td>Página cargada completamente</td>
+						<td><code>&lt;body&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onmousedown</code></td>
+						<td>Pulsar un botón del ratón y no soltarlo</td>
+						<td>Todos los elementos</td>
+					</tr>
+					<tr>
+						<td><code>onmousemove</code></td>
+						<td>Mover el ratón</td>
+						<td>Todos los elementos</td>
+					</tr>
+					<tr>
+						<td><code>onmouseout</code></td>
+						<td>El ratón "sale" del elemento</td>
+						<td>Todos los elementos</td>
+					</tr>
+					<tr>
+						<td><code>onmouseover</code></td>
+						<td>El ratón "entra" en el elemento</td>
+						<td>Todos los elementos</td>
+					</tr>
+					<tr>
+						<td><code>onmouseup</code></td>
+						<td>Soltar el botón del ratón</td>
+						<td>Todos los elementos</td>
+					</tr>
+					<tr>
+						<td><code>onreset</code></td>
+						<td>Inicializar el formulario</td>
+						<td><code>&lt;form&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onresize</code></td>
+						<td>Modificar el tamaño de la ventana</td>
+						<td><code>&lt;body&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onselect</code></td>
+						<td>Seleccionar un texto</td>
+						<td><code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onsubmit</code></td>
+						<td>Enviar el formulario</td>
+						<td><code>&lt;form&gt;</code></td>
+					</tr>
+					<tr>
+						<td><code>onunload</code></td>
+						<td>Se abandona la página, por ejemplo al cerrar el navegador</td>
+						<td><code>&lt;body&gt;</code></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br><br>
+	</div>
+
+	<footer class="page-footer green darken-2">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Company Bio</h5>
+					<p class="grey-text text-lighten-4">We are a team of college students working on this project like
+						it's our full time job. Any amount would help support and continue development on this project
+						and is greatly appreciated.</p>
+
+
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Settings</h5>
+					<ul>
+						<li><a class="white-text" href="#!">Link 1</a></li>
+						<li><a class="white-text" href="#!">Link 2</a></li>
+						<li><a class="white-text" href="#!">Link 3</a></li>
+						<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Connect</h5>
+					<ul>
+						<li><a class="white-text" href="#!">Link 1</a></li>
+						<li><a class="white-text" href="#!">Link 2</a></li>
+						<li><a class="white-text" href="#!">Link 3</a></li>
+						<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+			</div>
+		</div>
+	</footer>
+
+
+	<!--  Scripts-->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+
+</body>
+
+</html>
