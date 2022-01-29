@@ -6,75 +6,48 @@
 		<link href="css/main.css" rel="stylesheet">
 	
 	</head>
-	<body>
+	<body>		
+		<div class="contenedor">
+			<div class="enLinea">
+				<table>
+					<tr>
+						<td class="claseBorde" onclick="console.log('Soy UNO')">UNO</td>
+						<td class="claseBorde">DOS</td>
+						<td class="claseBorde">TRES</td>
+						<td class="claseBorde">CUATRO</td>
+					</tr>
+					<tr>
+						<td class="claseBorde" onclick="funReflejar()">Cinco</td>
+						<td class="claseBorde">Seis</td>
+						<td class="claseBorde"><input type="text" onkeypress="presionoTecla(Event)"> </td>
+						<td class="claseBorde" id ="idTextoCostado" ></td>
+					</tr>
+					<tr>
+						<td class="claseBorde"></td>
+						<td class="claseBorde" id="idTdDiez">Diez</td>
+						<td class="claseBorde"></td>
+						<td class="claseBorde"></td>
+					</tr>
+					<tr>
+						<td class="claseBorde" id="idTdTrece">13</td>
+						<td class="claseBorde">14</td>
+						<td class="claseBorde"></td>
+						<td class="claseBorde" onclick="alert('Soy Ultima')"> Ultima </td>
+					</tr>
+					<tr>
+						<td class="claseBorde" colspan="2" style="background-color:green;" onmouseover="ponerVerde()">Verde</td>
+					
+						<td class="claseBorde" colspan="2" style="background-color:red;" onmouseover="ponerRojo()">Rojo</td>
+					</tr>
+					<tr id="idTrVacio">
 
-		<div >
-			<table>
-				<tr>
-					<td class="claseBorde" onclick="console.log('Soy UNO')">UNO</td>
-					<td class="claseBorde">DOS</td>
-					<td class="claseBorde">TRES</td>
-					<td class="claseBorde">CUATRO</td>
-				</tr>
-				<tr>
-					<td class="claseBorde" onclick="funReflejar()">Cinco</td>
-					<td class="claseBorde">Seis</td>
-					<td class="claseBorde"></td>
-					<td class="claseBorde"></td>
-				</tr>
-				<tr>
-					<td class="claseBorde"></td>
-					<td class="claseBorde" id="idTdDiez">Diez</td>
-					<td class="claseBorde"></td>
-					<td class="claseBorde"></td>
-				</tr>
-				<tr>
-					<td class="claseBorde" id="idTdTrece">13</td>
-					<td class="claseBorde">14</td>
-					<td class="claseBorde"></td>
-					<td class="claseBorde" onclick="alert('Soy Ultima')"> Ultima </td>
-				</tr>
-				<tr>
-					<td class="claseBorde" colspan="2" style="background-color:green;" onmouseover="ponerVerde()">Verde</td>
-				
-					<td class="claseBorde" colspan="2" style="background-color:red;" onmouseover="ponerRojo()">Rojo</td>
-				</tr>
-				<tr id="idTrVacio">
-
-				</tr>
-			</table>	
+					</tr>
+				</table>
+			</div>
 		</div>
 	</body>
 
-	<script>
-
-		function funReflejar(){
-
-			document.getElementById("idTdDiez").innerHTML = "Soy el diez";
-
-		}
-
-		function ponerVerde(){
-
-			document.getElementById("idTdTrece").style.backgroundColor="green";
-
-		}
-
-		function ponerRojo(){
-
-			document.getElementById("idTdTrece").style.backgroundColor="red";
-
-		}
-
-		window.onload = function() {
-
-			document.getElementById("idTrVacio").innerHTML = " <td class='claseBorde' colspan='4'></td> ";
-
-		};
-
-
-	</script>
-
+	<script src="js/main.js"></script>
 </html>
 
 
