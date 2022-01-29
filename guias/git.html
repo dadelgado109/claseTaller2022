@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-	<title>Etiquetas HTML</title>
+	<title>Comandos GIT</title>
 
 	<!-- CSS  -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -16,14 +16,23 @@
 <body>
 	<nav class="green darken-2" role="navigation">
 		<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+			<!-- Menu para web-->
 			<ul class="right hide-on-med-and-down">
-				<li><a href="#">Navbar Link</a></li>
+				<li><a href="html.html">HTML</a></li>
+				<li><a href="css.html">CSS</a></li>
+				<li><a href="js.html">JS</a></li>
+				<li><a href="git.html">GIT</a></li>
 			</ul>
-
+			<!-- Menu para web-->
+			<!-- Menu para movile-->
 			<ul id="nav-mobile" class="side-nav">
-				<li><a href="#">Navbar Link</a></li>
+				<li><a href="html.html">HTML</a></li>
+				<li><a href="css.html">CSS</a></li>
+				<li><a href="js.html">JS</a></li>
+				<li><a href="git.html">GIT</a></li>
 			</ul>
 			<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+			<!-- Menu para movile-->
 		</div>
 	</nav>
 	<div class="section no-pad-bot" id="index-banner">
@@ -41,14 +50,12 @@
 
 	<div class="container">
 		<div class="section">
-
 			<!--   Icon Section   -->
 			<table class="striped">
 				<thead id="html-raiz">
-					<tr>
+					<tr class="card-panel green lighten-2">
 						<th width="300">Comando</th>
 						<th width="300">Descripci&#243;n</th>
-						<th width="300">Propiedades</th>
 						<th width="300">Ejemplo</th>
 					</tr>
 				</thead>
@@ -56,27 +63,107 @@
 					<tr>
 						<td>init</td>
 						<td>Este comando se utiliza para crear un repositorio git</td>
-						<td></td>
-						<td>git pull origin main</td>
+						<td><pre>git pull origin main</pre></td>
 					</tr>				
 					<tr>
 						<td>clone</td>
 						<td>Clonar un repositorio local o remoto</td>
-						<td></td>
-						<td>git clone https://git...../proyecto.git myProyecto</td>
+						<td><pre>git clone https://git...../proyecto.git myProyecto</pre></td>
 					</tr>
 					<tr>
 						<td>pull</td>
-						<td>Commado que se emplea para descargar contenido desde el repositorio remoto y actualiza al instante el repositorio local</td>
-						<td></td>
-						<td>git pull origin main</td>
+						<td>Commado que se emplea para descargar contenido desde el repositorio remoto y actualiza al instante el repositorio local</td>				
+						<td><pre>git pull origin main</pre></td>
 					</tr>
 					<tr>
-						<td>pull</td>
-						<td>Commado que se emplea para descargar contenido desde el repositorio remoto y actualiza al instante el repositorio local</td>
-						<td></td>
-						<td>git pull origin main</td>
-					</tr>					
+						<td>branch</td>
+						<td>Este comando se utiliza para trabajar con todas las ramas que hay en nuestro entorno de desarrollo</td>						
+						<td>
+							<ul>
+								<li>
+									<pre>git branch (Muestras todas las ramas)</pre>
+								</li>
+								<li>
+									<pre>git branch &lt;miRama&gt; (Crea una nueva rama llamada miRama)</pre>	
+								</li>
+								<li>
+									<pre>git branch -d &lt;miRama&gt; (Elimina la rama miRama)</pre>	
+								</li>
+								<li>
+									<pre>git branch -D &lt;miRama&gt; (Elimina la rama miRama de forma forzada)</pre>	
+								</li>
+								<li>
+									<pre>git branch -m &lt;miRama&gt; (Cambia el nombre de la rama actual)</pre>	
+								</li>
+								<li>
+									<pre>git branch -a &lt;miRama&gt; (Enumera las ramas remotas eso incluye ramas de compañeros)</pre>	
+								</li>
+							</ul>	
+						</td>
+					</tr>	
+					<tr>
+						<td>status</td>
+						<td>Nos muestras los archivos que fuimos modificando en nuestra rama</td>				
+						<td><pre>git status</pre></td>
+					</tr>
+					<tr>
+						<td>stash</td>
+						<td>Este comando saca una foto de nuestros cambio y deja el desarrollo con los cambios de nuestro último pull</td>				
+						<td>
+							<ul>
+								<li><pre>git stash (Saca la foto y restablece el código)</pre></li>
+								<li><pre>git stash pop (Recuperamos la foto)</pre></li>
+							</ul>							
+						</td>
+					</tr>
+					<tr>
+						<td>add</td>
+						<td>Este comando agrega archivos para subir subir al repositorio</td>				
+						<td>
+							<ul>
+								<li><pre>git add &lt;ruta archivo especifica&gt; (Agrego un archivo en especifico)</pre></li>
+								<li><pre>git add * (Agrego todos los archivos modificados)</pre></li>
+							</ul>							
+						</td>
+					</tr>
+					<tr>
+						<td>commit</td>
+						<td>Este comando sirve para marcar que un trabajo esta completado en el repositorio local.</td>				
+						<td>
+							<ul>
+								<li><pre>git commit</pre></li>
+								<li><pre>git commit -m "Comentario" (Agrego un comentario)</pre></li>
+							</ul>							
+						</td>
+					</tr>
+					<tr>
+						<td>checkout</td>
+						<td>Este comando te permite cambiar de una rama a otra rama </td>				
+						<td>
+							<ul>
+								<li><pre>git checkout &lt;nombreRama&gt; (Me muevo a la rama nombreRama)</pre>	</li>
+								<li><pre>git checkout -b &lt;nuevaRama&gt; (Creo una rama nuevaRama y me muevo a ella)</pre></li>
+							</ul>		
+						</td>
+					</tr>
+					<tr>
+						<td>merge</td>
+						<td>Se utiliza para unificar 2 ramas</td>				
+						<td>
+							<pre>git marge &lt;ramaExitente&gt; </pre>					
+						</td>
+					</tr>
+					<tr>
+						<td>push</td>
+						<td>Este comando sube al repositorio el cambio guardado con el commit.</td>				
+						<td>
+							<ul>
+								<li><pre>git push (Sube todo los cambios a la rama principal)</pre></li>
+								<li><pre>git push &lt;rama&gt; (De esta forma se suben los cambios a esta rama)</pre></li>
+								<li><pre>git push &lt;rama&gt; --force (Forzamos la suba de cambios a la rama)</pre></li>
+							</ul>							
+						</td>
+					</tr>				
 				</tbody>
 			</table>
 		</div>
@@ -91,8 +178,6 @@
 					<p class="grey-text text-lighten-4">We are a team of college students working on this project like
 						it's our full time job. Any amount would help support and continue development on this project
 						and is greatly appreciated.</p>
-
-
 				</div>
 				<div class="col l3 s12">
 					<h5 class="white-text">Settings</h5>
