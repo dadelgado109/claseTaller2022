@@ -1,8 +1,51 @@
 <?PHP
 
+	if(isset($_POST['accion']) && $_POST['accion'] == "restablecer"){
+		
+		@session_start();
+		@session_destroy();
+		
+	}
+	// Decirle al script que voy a usar las variables $_SESSION
+	@session_start();
+
+
+	// Defino la variable arrayTabla a array();
+	$arrayTabla = array();
+
+	// Verifico si la veriable esta creada 	
+	if( !isset($_SESSION['tabla']) ){
+		// Solo va a entrar a esta parte del codigo en caso que no exista la variable
+		$_SESSION['tabla'] = array();
+		$_SESSION['tabla'][1] = array("nombre"=>"Damian", "apellido"=>"Delgado", "edad"=>"34", "color"=>"Azul"); 
+		$_SESSION['tabla'][2] = array("nombre"=>"Marco Antonio", "apellido"=>"Solis", "edad"=>"66", "color"=>"Verde");
+		$_SESSION['tabla'][3] = array("nombre"=>"Riky", "apellido"=>"Martin", "edad"=>"50", "color"=>"Rojo");
+		$_SESSION['tabla'][4] = array("nombre"=>"Soledad", "apellido"=>"Pastoruti", "edad"=>"45", "color"=>"Verde");
+
+	}
+
+	// con el foreach recorro el array y los resultados por cada vuelta lo voy guardando en $datos
+	if(isset($_POST['accion']) && $_POST['accion'] == "reiniciar"){
+	
+		echo("Estoy reiniciando");
+		unset($_SESSION['tabla']);
+		$_SESSION['tabla'] = array();
+		
+	}
+
+
+	foreach($_SESSION['tabla'] as $indice => $datos ){
+
+		$arrayTabla[$indice] = $datos;
+	
+	}
+
+	
+
+
 
 ?>
-
+		
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +69,7 @@
 			<ul class="right hide-on-med-and-down">
 				
 				<li>
-					<form action="ejercicio_001.php?action=restablecer" method="POST" style="margin-top: 10px;">
+					<form action="prueba.php?action=restablecer" method="POST" style="margin-top: 10px;">
 						<input type="hidden" name="accion" value="restablecer">
 						<button class="btn blue darken-3 right" type="submit" name="action">
 							Restablecer
@@ -43,7 +86,7 @@
 			<!-- Menu para movile-->
 			<ul id="nav-mobile" class="side-nav">
 				<li>
-					<form action="ejercicio_001.php?action=restablecer" method="POST"  >
+					<form action="prueba.php?action=restablecer" method="POST"  >
 						<input type="hidden" name="accion" value="restablecer">
 						<button class="btn blue darken-3 right" type="submit" name="action">
 							Restablecer
@@ -75,7 +118,7 @@
 
 	<div class="container">
 		<div class="section">
-			<form class="col s12" action="ejercicio_001.php?action=ingresar" method="POST">
+			<form class="col s12" action="prueba.php?action=ingresar" method="POST">
 				<div class="row">
 					<div class="col s3">
 					</div>
@@ -120,7 +163,7 @@
 				<thead>
 					<tr class="blue lighten-8" >
 						<th colspan="6" >
-							<form action="ejercicio_001.php?action=reiniciar" method="POST">
+							<form action="prueba.php?action=reiniciar" method="POST">
 								<input type="hidden" name="accion" value="reiniciar">
 								<button class="btn blue darken-3 right" type="submit" name="action">Reiniciar
 									<i class="material-icons right">delete</i>
@@ -138,8 +181,11 @@
 					</tr>
 				</thead>
 				<tbody>
+<?PHP
+				foreach($arrayTabla as $i => $data){	
+?>
 					<tr>
-						<td><?=$key?></td>
+						<td><?=$i?></td>
 						<td><?=$data['nombre']?></td>
 						<td><?=$data['apellido']?></td>
 						<td><?=$data['edad']?></td>
@@ -152,6 +198,9 @@
 							</form>
 						</td>	
 					</tr>
+<?php
+				}
+?>						
 				</tbody>
 			</table>
 
