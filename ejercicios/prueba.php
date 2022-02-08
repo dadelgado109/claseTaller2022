@@ -1,11 +1,14 @@
 <?PHP
 
+
+
 	if(isset($_POST['accion']) && $_POST['accion'] == "restablecer"){
 		
 		@session_start();
 		@session_destroy();
 		
 	}
+	
 	// Decirle al script que voy a usar las variables $_SESSION
 	@session_start();
 
@@ -33,11 +36,50 @@
 		
 	}
 
+	// Primero valido si viene la accion
+	if(isset($_POST['accion']) && $_POST['accion'] == "ingresar"){
+		
+		if(isset($_POST['txtNombre']) && isset($_POST['txtApellido']) && isset($_POST['numEdad'])){
 
+			if( !empty($_POST['txtNombre']) && !empty($_POST['txtApellido']) && !empty($_POST['numEdad'])){
+
+				if(isset($_POST['txtColor']) && !empty($_POST['txtColor']) ){
+					$txtColor = $_POST['txtColor'];
+				}else{
+					$txtColor = "No Tiene";
+				}
+
+				$txtNombre		= $_POST['txtNombre'];
+				$txtApellido	= $_POST['txtApellido'];
+				$numEdad 		= $_POST['numEdad'];
+
+				$intLugares = count($_SESSION['tabla']);
+				$intLugarNuevo = $intLugares + 1;
+
+				$_SESSION['tabla'][$intLugarNuevo] = array("nombre"=>$txtNombre, "apellido"=>$txtApellido, "edad"=>$numEdad, "color"=>$txtColor);
+
+			}
+		}		
+	}
+
+
+	if(isset($_POST['accion']) && $_POST['accion'] == "eliminar"){
+		
+		if(isset($_POST['idRegistro']) && isset($_POST['idRegistro'])){
+
+			$idRegistro = $_POST['idRegistro'];
+			$_SESSION['tabla'][$idRegistro]['nombre'] = "";
+
+		}	
+	}
+
+	$indiceExterno = 1;
 	foreach($_SESSION['tabla'] as $indice => $datos ){
 
-		$arrayTabla[$indice] = $datos;
-	
+		if($datos['nombre'] != ""){
+			$arrayTabla[$indiceExterno] = $datos;
+			$indiceExterno = $indiceExterno + 1;
+		}			
 	}
 
 	
@@ -64,7 +106,8 @@
 
 <body>
 	<nav class=" lime lighten-2" role="navigation">
-		<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+		<div class="nav-wrapper container">
+			<a id="logo-container" href="#" class="brand-logo">Logo</a>
 			<!-- Menu para web-->
 			<ul class="right hide-on-med-and-down">
 				
@@ -118,45 +161,45 @@
 
 	<div class="container">
 		<div class="section">
-			<form class="col s12" action="prueba.php?action=ingresar" method="POST">
 				<div class="row">
 					<div class="col s3">
 					</div>
 					<div class="col s6">
-						<div class="row">
-							<div class="input-field col s12">
-								<input  type="text" class="validate" id="idNombre" name="txtNombre" placeholder="Nombre">
-								<label for="idNombre">Nombre</label>
+						<form action="prueba.php" method="POST">
+							<div class="row">
+								<div class="input-field col s12">
+									<input  type="text" class="validate" id="idNombre" name="txtNombre" placeholder="Nombre">
+									<label for="idNombre">Nombre</label>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-								<input type="text"  class="validate" id="idApellido" name="txtApellido" placeholder="Apellido" >
-								<label for="idApellido">Apellido</label>
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="text"  class="validate" id="idApellido" name="txtApellido" placeholder="Apellido" >
+									<label for="idApellido">Apellido</label>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-								<input type="number" class="validate" id="idEdad"  name="numEdad" placeholder="Edad" >
-								<label for="idEdad">Edad</label>
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="number" class="validate" id="idEdad"  name="numEdad" placeholder="Edad" >
+									<label for="idEdad">Edad</label>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-								<input type="text" class="validate" id="idColor"  name="txtColor" placeholder="color" >
-								<label for="idColor">Color</label>
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="text" class="validate" id="idColor"  name="txtColor" placeholder="color" >
+									<label for="idColor">Color</label>
+								</div>
 							</div>
-						</div>
-						<hr>
-						<input type="hidden" name="accion" value="ingresar">
-						<button class="btn waves-effect waves-light cyan darken-3" type="submit" name="action">Submit
-							<i class="material-icons right">send</i>
-						</button>
+							<hr>
+							<input type="hidden" name="accion" value="ingresar">
+							<button class="btn waves-effect waves-light cyan darken-3" type="submit">Ingresar
+								<i class="material-icons right">send</i>
+							</button>
+						</form>
 					</div>
 					<div class="col s3">
 					</div>
 				</div>
-			</form>
 			<!--   Icon Section   -->
 
 			<table class="striped">
@@ -181,7 +224,7 @@
 					</tr>
 				</thead>
 				<tbody>
-<?PHP
+<?PHP				
 				foreach($arrayTabla as $i => $data){	
 ?>
 					<tr>
@@ -191,8 +234,10 @@
 						<td><?=$data['edad']?></td>
 						<td><?=$data['color']?></td>
 						<td>
-							<form>
-								<button class="btn-floating waves-effect waves-light cyan darken-3" type="submit" name="action">
+							<form accion="prueba.php" method="POST">
+								<button class="btn-floating waves-effect waves-light cyan darken-3" type="submit">
+									<input type="hidden" name="accion" value="eliminar">
+									<input type="hidden" name="idRegistro" value="<?=$i?>">
 									<i class="material-icons right">delete_forever</i>
 								</button>
 							</form>
