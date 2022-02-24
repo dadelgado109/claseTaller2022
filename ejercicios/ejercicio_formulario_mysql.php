@@ -207,7 +207,7 @@
 					<tbody>
 	<?PHP
 					foreach($lista as $i => $data){	
-	?>
+ 	?>
 						<tr>
 							<td><?=$data['id']?></td>
 							<td><?=$data['nombre']?></td>
