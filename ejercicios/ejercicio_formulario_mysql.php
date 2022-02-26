@@ -53,7 +53,7 @@
 	unset($_POST);
 
 	//SELECT * FROM personas;
-	$sqlPersonas = "SELECT * FROM personas;";
+	$sqlPersonas = "SELECT * FROM personas";
 	$mysqlPDO = $conexion->prepare($sqlPersonas);
 	$respuesta = $mysqlPDO->execute();
 
