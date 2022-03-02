@@ -5,8 +5,54 @@
 require_once("modelos/autores.php");
 
 
+$objAutores = new autores();
+
+$objAutores->traerAutor(4);
+
+echo("<h1>");
+echo($objAutores->pais);
+echo("</h1>");
+$objAutores->pais = "ARA";
+echo("<hr>");
+echo("<h1>");
+echo($objAutores->pais);
+echo("</h1>");
+
+$respuesta = $objAutores->guardarAutor();
+
+echo($respuesta);
 
 
+
+
+die();
+
+
+// ---------------------------------------------------------------------------- \\
+// ---------------------------------------------------------------------------- \\
+// ---------------------------------------------------------------------------- \\
+// ---------------------------------------------------------------------------- \\
+
+$objAutores = new autores();
+
+$datos = ["idRegistro"=>"", "estadoRegistro"=>"", 'nombre'=>'Vanesa', 'pais'=>'CHI'];
+
+$objAutores->constructor($datos);
+
+$respuesta = $objAutores->ingresarAutor();
+
+print_r($respuesta);
+echo("<br>");
+
+$listaAutores = $objAutores->listarAutores();
+print_r($listaAutores);
+
+die();
+
+// ---------------------------------------------------------------------------- \\
+// ---------------------------------------------------------------------------- \\
+// ---------------------------------------------------------------------------- \\
+// ---------------------------------------------------------------------------- \\
 
 $objAutores = new autores();
 
@@ -75,6 +121,9 @@ echo("<hr>");
 $listaAutoresUruguayos = $objAutores->listarAutoresUruguayos();
 
 print_r($listaAutoresUruguayos);
+
+
+
 
 
 ?>

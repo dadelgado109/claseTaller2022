@@ -61,12 +61,14 @@ class generico {
 			ESte metodo lo que hace es realizar consulta select contra la base de datos para 
 			devolver lista de registros
 		*/
-		
-		$clave = "";
-		$user = "root";
-		$conexion = new PDO("mysql:host=localhost;dbname=libreria",$user,$clave);
-		$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		include("configuracion/configuracion.php");
 
+		$clave = $ARRAYCONFIGURACION['MySQL']['password'];
+		$user = $ARRAYCONFIGURACION['MySQL']['user'];
+
+		$conexion = new PDO("mysql:host=".$ARRAYCONFIGURACION['MySQL']['host'].";dbname=".$ARRAYCONFIGURACION['MySQL']['dbName']."",$user,$clave);
+
+		$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$mysqlPDO 	= $conexion->prepare($sqlSentencia);
 		$respuesta	= $mysqlPDO->execute($arrayEjecutar);
 
@@ -76,6 +78,26 @@ class generico {
 			$lista = array();
 		}
 		return $lista;
+
+	}
+
+	public function ejecutarSentencia($sqlSentencia, $arrayEjecutar = array()){
+		/*
+			ESte metodo lo que hace es realizar consulta select contra la base de datos para 
+			devolver lista de registros
+		*/
+		include("configuracion/configuracion.php");
+
+		$clave = $ARRAYCONFIGURACION['MySQL']['password'];
+		$user = $ARRAYCONFIGURACION['MySQL']['user'];
+
+		$conexion = new PDO("mysql:host=".$ARRAYCONFIGURACION['MySQL']['host'].";dbname=".$ARRAYCONFIGURACION['MySQL']['dbName']."",$user,$clave);
+
+		$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$mysqlPDO 	= $conexion->prepare($sqlSentencia);
+		$respuesta	= $mysqlPDO->execute($arrayEjecutar);
+
+		return $respuesta;
 
 	}
 
