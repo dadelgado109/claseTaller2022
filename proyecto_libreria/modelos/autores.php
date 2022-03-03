@@ -9,6 +9,7 @@ class autores extends generico{
 	// El pais es el country iso 3 Caracteres
 	public $pais;
 
+	
 
 	public function constructor($arrayDatos = array()){
 
@@ -43,8 +44,6 @@ class autores extends generico{
 
 	}
 
-	
-
 	public function traerAutor($idRegistro){
 		
 		$varSQL = 'SELECT * FROM autores WHERE idAutor = :idAutor;';
@@ -59,7 +58,7 @@ class autores extends generico{
 
 	}
 
-	
+
 	public function guardarAutor(){
 		
 		

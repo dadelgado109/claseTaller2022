@@ -1,3 +1,31 @@
+<?PHP
+
+require_once("modelos/autores.php");
+
+$objAutores = new autores();
+
+
+if(isset($_POST['accion']) && $_POST['accion'] == "Ingresar"){
+
+	$nombre = $_POST['txtNombre'];
+	$pais 	= $_POST['txtPais'];
+	
+	$datos = [
+			'idRegistro'	=>'', 
+			'estadoRegistro'=>'', 
+			'nombre'		=> $nombre, 
+			'pais'			=> $pais];
+
+	$objAutores->constructor($datos);
+	$respuesta = $objAutores->ingresarAutor();
+
+}
+
+
+$listaAutores = $objAutores->listarAutores();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -38,14 +66,9 @@
 		<div class="section no-pad-bot" id="index-banner">
 			<div class="container">
 			<br><br>
-			<h1 class="header center orange-text">Starter Template</h1>
-			<div class="row center">
-				<h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-			</div>
-			<div class="row center">
-				<a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light orange">Get Started</a>
-			</div>
-			<br><br>
+			<h1 class="header center orange-text">Listado Autores</h1>			
+				<br>
+				<br>
 			</div>
 		</div>
 
@@ -53,51 +76,66 @@
 		<div class="container">
 			<table class="striped">
 				<thead>
-					<tr>
+					<tr class="blue darken-3">
+						<th colspan="4"><a class="waves-effect waves-light btn modal-trigger blue darken-3" href="#modal1">Ingresar</a></th>
+					</tr>
+					<tr class="blue darken-3">
 						<th>#Id Registro</th>
 						<th>Nombre</th>
-						<th>Mail</th>
-						<th>Perfil</th>
+						<th>País</th>
 						<th>Estado</th>
 					</tr>
 				</thead>
 				<tbody>
+<?php
+				foreach($listaAutores as $autores){
+?>
 					<tr>
-						<td>1</td>	
-						<td>r.rodriguez</td>
-						<td>rrodriguez@empresa.com</td>
-						<td>Administrador</td>
-						<td>Activado</td>
-					</tr>
-					<tr>
-						<td>2</td>	
-						<td>g.gonzalez</td>
-						<td>ggonzalez@empresa.com</td>
-						<td>Supervisor</td>
-						<td>Activado</td>
-					</tr>	
-					<tr>
-						<td>3</td>	
-						<td>p.perez</td>
-						<td>pperez@empresa.com</td>
-						<td>Vendedor</td>
-						<td>Activado</td>
-					</tr>	
-					<tr>
-						<td>4</td>	
-						<td>p.pereira</td>
-						<td>ppereira@empresa.com</td>
-						<td>Vendedor</td>
-						<td>Activado</td>
-					</tr>							
+						<td><?=$autores['idAutor']?></td>	
+						<td><?=$autores['nombre']?></td>
+						<td><?=$autores['pais']?></td>
+						<td><?=$autores['estadoRegistro']?></td>
+					</tr>					
+<?php
+				}
+?>
 				</tbody>
 			</table>
 			<br><br>
 		</div>
 
-		<br><br>
-		<br><br>
-		<br><br>
+
+		  <!-- Modal Structure -->
+		 <div id="modal1" class="modal">
+			<div class="modal-content">				
+				<div class="row">
+					<form class="col s12" action="backend.php" method="POST">
+						<div class="input-field col s12">
+							<h3>Ingresar Autores</h3>
+						</div>
+						<div class="input-field col s12">
+							<input placeholder="Nombre Autor" name="txtNombre" id="first_name" type="text" class="validate">
+							<label for="first_name">Nombre</label>
+						</div>
+						<div class="input-field col s12">
+							<input placeholder="Pais Autor" name="txtPais" id="first_name" type="text" class="validate">
+							<label for="first_name">Pais</label>
+						</div>
+						<input type="hidden" id="idAccion" name="accion" value="Ingresar" >
+						<button class="btn waves-effect waves-light cyan darken-3" type="submit">Enviar
+							<i class="material-icons right">send</i>
+						</button>	
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer blue darken-4">
+				<a href="#!" class="modal-close waves-effect waves-green btn-flat  white-text">Cancelar</a>
+			</div>
+		</div>
+
+		<br><br><br><br>
+		<br><br><br><br>
+		<br><br><br><br>
 		<footer class="page-footer blue darken-4">
 			<div class="container">				
 			</div>
@@ -111,6 +149,13 @@
 		<script src="backend/js/jquery-2.1.1.min.js"></script>
 		<script src="backend/js/materialize.js"></script>
 		<script src="backend/js/init.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {		
 
+ 				M.AutoInit();
+				var elems = document.querySelectorAll('.modal');
+				var instances = M.Modal.init(elems, options);
+			});
+		</script>
 	</body>
 </html>
