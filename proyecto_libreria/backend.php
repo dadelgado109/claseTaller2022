@@ -76,9 +76,7 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Guardar"){
 	}
 }
 
-
 $listaAutores = $objAutores->listarAutores();
-
 
 ?>
 <!DOCTYPE html>
@@ -177,7 +175,7 @@ $listaAutores = $objAutores->listarAutores();
 						<input placeholder="Pais Autor" name="txtPais" id="first_name" type="text" class="validate" value="<?=$objAutores->pais?>">
 						<label for="first_name">Pais</label>
 					</div>
-					<!-- 
+
 					<div class="input-field col s12">
 						<div class="switch">
 							<label>
@@ -188,11 +186,7 @@ $listaAutores = $objAutores->listarAutores();
 							</label>
 						</div>
 					</div>
-	-->
-					<div class="">
-						<label for="first_name">Eliminar?</label>
-						<input type="checkbox" name="eliminar" value="ok">
-					</div>
+
 					<input type="hidden" id="idAccion" name="accion" value="Guardar">
 					<input type="hidden" id="idRegistro" name="idRegistro" value="<?=$objAutores->obtenerIdRegistro()?>">
 					<button class="btn waves-effect waves-light cyan darken-3" type="submit">Guardar
