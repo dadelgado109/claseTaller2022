@@ -21,26 +21,54 @@ class autores extends generico{
 
 	public function ingresarAutor(){
 		
-		
-		$fecha = date("Y-m-d h:i:s");
+		/*
+			Primero evaluo si el autor esta ingresado
+			1) chequeo que exista el autor con nombre y el pais(countryCode 3)
+		*/
+		try{
 
-		$sql = "INSERT INTO autores SET
-					nombre = :nombre,
-					pais   = :pais,
-					estadoRegistro = :estado,
-					fechaEdicion = :fechaEdicion,
-					historial = '';
-			";
+			$varSQL = 'SELECT * FROM autores WHERE nombre = :nombre AND pais = :pais;';		
+			$arrayAutor = array('nombre' => $this->nombre, 'pais' => $this->pais);
+			$respuesta = $this->traerListado($varSQL, $arrayAutor);
 
-		$arrayAutor = array(
-			"nombre"	=>	$this->nombre,
-			"pais" 		=>  $this->pais,
-			"estado"	=>	$this->estadoRegistro,
-			"fechaEdicion" =>  $fecha,
-		);	
+			if(!empty($respuesta)){
+				/*
+					En caso que tenga registro entro aca y devuelvo que ya ese autor esta ingresado
+				*/
+				return "Ya esta ingresado el autor";
+			}
 
-		$retorno = $this->ejecutarSentencia($sql, $arrayAutor);
-		return $retorno;
+			$fecha = date("Y-m-d h:i:s");
+			$sql = "INSERT INTO autores SET
+						nombre = :nombre,
+						pais   = :pais,
+						estadoRegistro = :estado,
+						fechaEdicion = :fechaEdicion,
+						historial = '';
+				";
+
+			$arrayAutor = array(
+				"nombre"	=>	$this->nombre,
+				"pais" 		=>  $this->pais,
+				"estado"	=>	$this->estadoRegistro,
+				"fechaEdicion" =>  $fecha,
+			);	
+
+			$respuesta = $this->ejecutarSentencia($sql, $arrayAutor);
+
+			if($respuesta == 1){
+				$retorno = "Se ingreso el autor correctamente";
+			}else{
+				$retorno = "Error al ingresar el autor";
+			}
+
+			return $retorno;
+
+		}catch(PDOException $e){
+
+			$retorno = "Ocurrio Un error al ingresar autores";
+			return $retorno;
+		}
 
 	}
 
@@ -81,11 +109,15 @@ class autores extends generico{
 			"idAutor" =>  $this->idRegistro,
 		);	
 
-		$retorno = $this->ejecutarSentencia($sql, $arrayAutor);
+		$respuesta = $this->ejecutarSentencia($sql, $arrayAutor);
+		if($respuesta == 1){
+			$retorno = "Se guardo el autor correctamente";
+		}else{
+			$retorno = "Error al guardar el autor";
+		}
 		return $retorno;
 
 	}
-
 
 
 	public function listarAutores(){

@@ -4,6 +4,7 @@ require_once("modelos/autores.php");
 
 $objAutores = new autores();
 
+$respuesta = "";
 
 if(isset($_POST['accion']) && $_POST['accion'] == "Ingresar"){
 
@@ -19,6 +20,60 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Ingresar"){
 	$objAutores->constructor($datos);
 	$respuesta = $objAutores->ingresarAutor();
 
+}
+
+if(isset($_POST['accion']) && $_POST['accion'] == "Eliminar"){
+	
+	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
+		$idRegistro = $_POST['idRegistro'];		
+		$objAutores->traerAutor($idRegistro);
+	}
+}
+
+if(isset($_POST['accion']) && $_POST['accion'] == "ConfirmarEliminar"){
+	
+	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
+
+		$idRegistro = $_POST['idRegistro'];
+		
+		$objAutores->traerAutor($idRegistro);
+		$objAutores->modificarEstadoBorrado();
+		$respuesta = $objAutores->guardarAutor();
+
+	}
+}
+
+
+
+if(isset($_POST['accion']) && $_POST['accion'] == "Editar"){
+	
+	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
+
+		$idRegistro = $_POST['idRegistro'];		
+		$objAutores->traerAutor($idRegistro);
+
+	}
+}
+
+
+if(isset($_POST['accion']) && $_POST['accion'] == "Guardar"){
+	
+	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
+
+		$idRegistro = $_POST['idRegistro'];		
+		$nombre 	= $_POST['txtNombre'];
+		$pais 		= $_POST['txtPais'];
+
+		$objAutores->traerAutor($idRegistro);
+		$objAutores->nombre = $nombre;
+		$objAutores->pais 	= $pais ;
+
+		if(isset($_POST['eliminar']) && $_POST['eliminar'] == "ok" ){
+			$objAutores->modificarEstadoBorrado();
+		}
+		$respuesta = $objAutores->guardarAutor();
+
+	}
 }
 
 
@@ -69,21 +124,97 @@ $listaAutores = $objAutores->listarAutores();
 			<h1 class="header center orange-text">Listado Autores</h1>			
 				<br>
 				<br>
+<?PHP	
+				if($respuesta != ""){
+					
+					echo('
+						<nav>
+							<div class="nav-wrapper center">'.
+								$respuesta				
+							.'</div>
+						</nav>
+					');
+				}
+?>
+
 			</div>
 		</div>
 
 
 		<div class="container">
+
+<?php
+	if(isset($_POST['accion']) && $_POST['accion'] == "Eliminar" && isset($_POST['idRegistro']) && $_POST['idRegistro'] != ""){
+?>
+			<div class="row red lighten-5">
+				<form class="col s12" action="backend.php" method="POST">
+					<div class="input-field col s12">
+						<h3>Eliminar el autor:<?=$objAutores->nombre?>?</h3>
+					</div>					
+					<input type="hidden" id="idAccion" name="accion" value="ConfirmarEliminar">
+					<input type="hidden" id="idRegistro" name="idRegistro" value="<?=$objAutores->obtenerIdRegistro()?>">
+					<button class="btn waves-effect waves-light red darken-3" type="submit">Eliminar
+						<i class="material-icons right">delete_forever</i>
+					</button>	
+				</form>
+			</div>	
+<?php
+	}
+?>
+<?php
+	if(isset($_POST['accion']) && $_POST['accion'] == "Editar" && isset($_POST['idRegistro']) && $_POST['idRegistro'] != ""){
+?>
+			<div class="row">
+				<form class="col s12" action="backend.php" method="POST">
+					<div class="input-field col s12">
+						<h3>Ingresar Autores</h3>
+					</div>
+					<div class="input-field col s12">
+						<input placeholder="Nombre Autor" name="txtNombre" id="first_name" type="text" class="validate" value="<?=$objAutores->nombre?>">
+						<label for="first_name">Nombre</label>
+					</div>
+					<div class="input-field col s12">
+						<input placeholder="Pais Autor" name="txtPais" id="first_name" type="text" class="validate" value="<?=$objAutores->pais?>">
+						<label for="first_name">Pais</label>
+					</div>
+					<!-- 
+					<div class="input-field col s12">
+						<div class="switch">
+							<label>
+							Activado
+							<input type="checkbox" name="eliminar" value="ok">
+							<span class="lever"></span>
+							Eliminar
+							</label>
+						</div>
+					</div>
+	-->
+					<div class="">
+						<label for="first_name">Eliminar?</label>
+						<input type="checkbox" name="eliminar" value="ok">
+					</div>
+					<input type="hidden" id="idAccion" name="accion" value="Guardar">
+					<input type="hidden" id="idRegistro" name="idRegistro" value="<?=$objAutores->obtenerIdRegistro()?>">
+					<button class="btn waves-effect waves-light cyan darken-3" type="submit">Guardar
+						<i class="material-icons right">send</i>
+					</button>	
+				</form>
+			</div>	
+<?php
+	}
+?>
+
 			<table class="striped">
 				<thead>
 					<tr class="blue darken-3">
-						<th colspan="4"><a class="waves-effect waves-light btn modal-trigger blue darken-3" href="#modal1">Ingresar</a></th>
+						<th colspan="5"><a class="waves-effect waves-light btn modal-trigger blue darken-3" href="#modal1">Ingresar</a></th>
 					</tr>
 					<tr class="blue darken-3">
 						<th>#Id Registro</th>
 						<th>Nombre</th>
 						<th>País</th>
 						<th>Estado</th>
+						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -95,6 +226,23 @@ $listaAutores = $objAutores->listarAutores();
 						<td><?=$autores['nombre']?></td>
 						<td><?=$autores['pais']?></td>
 						<td><?=$autores['estadoRegistro']?></td>
+						<td>
+							<form action="backend.php" method="POST">
+								<input type="hidden" name="accion" value="Eliminar">
+								<input type="hidden" name="idRegistro" value="<?=$autores['idAutor']?>">
+								<button class="btn-floating waves-effect waves-light red darken-3" type="submit" name="action">
+									<i class="material-icons right">delete_forever</i>
+								</button>
+							</form>
+							<form action="backend.php" method="POST">
+								<input type="hidden" name="accion" value="Editar">
+								<input type="hidden" name="idRegistro" value="<?=$autores['idAutor']?>">
+								<button class="btn-floating waves-effect waves-light green darken-3" type="submit" name="action">
+									<i class="material-icons right">edit</i>
+								</button>
+							</form>
+						</td>
+						
 					</tr>					
 <?php
 				}
@@ -155,6 +303,9 @@ $listaAutores = $objAutores->listarAutores();
  				M.AutoInit();
 				var elems = document.querySelectorAll('.modal');
 				var instances = M.Modal.init(elems, options);
+
+				M.toast({html: 'I am a toast!', classes: 'rounded'});
+
 			});
 		</script>
 	</body>

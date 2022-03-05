@@ -11,7 +11,7 @@ class generico {
 	*/
 
 	// ES el identificador unico de cada registro 
-	public $idRegistro;
+	protected $idRegistro;
 	// Es el estado en que se encuentra el registro 
 	protected $estadoRegistro;
 
@@ -27,6 +27,11 @@ class generico {
 
 	}
 
+	
+	public function obtenerIdRegistro(){
+		return $this->idRegistro;
+	}
+	
 	public function obtenerEstado(){
 		return $this->estadoRegistro;
 	}
@@ -38,6 +43,8 @@ class generico {
 	public function modificarEstadoIngresado(){
 		$this->estadoRegistro = "Ingresado";
 	}
+
+
 
 	protected function chequeadorConstructor($arrayDatos, $nombreCampo, $valorDefecto = ''){
 		/*
