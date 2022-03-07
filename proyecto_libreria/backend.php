@@ -76,7 +76,36 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Guardar"){
 	}
 }
 
-$listaAutores = $objAutores->listarAutores();
+
+$arrayFiltros = [];
+if(isset($_GET['pag'])){
+
+	$PAGINA = $_GET['pag'];
+
+	if($PAGINA == "" || $PAGINA <= 0){
+
+		$PAGINA = 0;
+		$PAGINAANTERIOR = $PAGINA;
+	
+	}else{
+
+		$PAGINAANTERIOR = $PAGINA - 1;
+	
+	}
+	$PAGINASIGUENTE = $PAGINA + 1;
+
+	$arrayFiltros['pagina'] = $PAGINA;
+
+}else{
+
+	$PAGINA = 0;
+	$PAGINASIGUENTE = $PAGINA + 1;
+	$PAGINAANTERIOR = $PAGINA;
+
+}
+
+
+$listaAutores = $objAutores->listarAutores($arrayFiltros);
 
 ?>
 <!DOCTYPE html>
@@ -241,6 +270,36 @@ $listaAutores = $objAutores->listarAutores();
 <?php
 				}
 ?>
+					<tr>
+						<td colspan="6">
+							<ul class="pagination right">
+								<li class="waves-effect">
+									<a href="backend.php?pag=<?=$PAGINAANTERIOR?>"><i class="material-icons">chevron_left</i></a>
+								</li>
+								<li class="active">
+									<a href="#!">1</a>
+								</li>
+								<li class="waves-effect">
+									<a href="#!">2</a>
+								</li>
+								<li class="waves-effect">
+									<a href="#!">3</a>
+								</li>
+								<li class="waves-effect">
+									<a href="#!">4</a>
+								</li>
+								<li class="waves-effect">
+									<a href="#!">5</a>
+								</li>
+								<li class="waves-effect">
+									<a href="backend.php?pag=<?=$PAGINASIGUENTE?>">
+										<i class="material-icons">chevron_right</i>
+									</a>
+								</li>
+							</ul>
+						</td>
+					</tr>
+
 				</tbody>
 			</table>
 			<br><br>

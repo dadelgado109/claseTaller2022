@@ -120,9 +120,30 @@ class autores extends generico{
 	}
 
 
-	public function listarAutores(){
+	public function listarAutores($filtos = array()){
 		
-		$varSQL = 'SELECT * FROM autores;';
+		//$varSQL = 'SELECT * FROM autores';
+
+
+		// Evaluo si existe en el array que recibo la clave pagina en caso contrario pongo por defecto 0.
+		if(isset($filtos['pagina']) && $filtos['pagina'] != "" ){			
+			$pagina = $filtos['pagina'];
+		}else{
+			$pagina = 0;
+		}
+		// Evaluo si existe en el array que recibo la clave limite en caso contrario pongo por defecto 10.
+		if(isset($filtos['limite']) && $filtos['limite'] != "" ){
+			$limite = $filtos['limite'];
+		}else{
+			$limite = 5;
+		}
+
+		//      SELECT * FROM autores LIMIT 0,10; 
+		$puntoSalida = $pagina * $limite;
+		$varSQL = "SELECT * FROM autores ORDER BY nombre LIMIT ".$puntoSalida.",".$limite."";
+
+
+
 		$retorno = $this->traerListado($varSQL, array());
 		return $retorno;
 
