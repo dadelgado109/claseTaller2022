@@ -76,24 +76,38 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Guardar"){
 	}
 }
 
-
 $arrayFiltros = [];
+$BUSCAR = "";
+
+if(isset($_GET['accion']) && $_GET['accion'] == "Buscar"){
+
+	if(isset($_GET['txtBuscar']) && $_GET['txtBuscar'] != ""){
+
+		$arrayFiltros['buscar'] = $_GET['txtBuscar'];
+		$BUSCAR 				= $_GET['txtBuscar'];
+	}
+}
+
+
+$totalAutores = $objAutores->totalAutores($arrayFiltros);
+
 if(isset($_GET['pag'])){
 
 	$PAGINA = $_GET['pag'];
 
 	if($PAGINA == "" || $PAGINA <= 0){
-
 		$PAGINA = 0;
-		$PAGINAANTERIOR = $PAGINA;
-	
+		$PAGINAANTERIOR = $PAGINA;	
 	}else{
-
-		$PAGINAANTERIOR = $PAGINA - 1;
-	
+		$PAGINAANTERIOR = $PAGINA - 1;	
 	}
-	$PAGINASIGUENTE = $PAGINA + 1;
 
+	$limitPagina = $totalAutores / 5;
+	if($limitPagina <= ($PAGINA+1) ){
+		$PAGINASIGUENTE = $PAGINA;
+	}else{
+		$PAGINASIGUENTE = $PAGINA + 1;		
+	}
 	$arrayFiltros['pagina'] = $PAGINA;
 
 }else{
@@ -101,9 +115,9 @@ if(isset($_GET['pag'])){
 	$PAGINA = 0;
 	$PAGINASIGUENTE = $PAGINA + 1;
 	$PAGINAANTERIOR = $PAGINA;
+	$limitPagina = $totalAutores / 5;
 
 }
-
 
 $listaAutores = $objAutores->listarAutores($arrayFiltros);
 
@@ -230,7 +244,24 @@ $listaAutores = $objAutores->listarAutores($arrayFiltros);
 			<table class="striped">
 				<thead>
 					<tr class="blue darken-3">
-						<th colspan="5"><a class="waves-effect waves-light btn modal-trigger blue darken-3" href="#modal1">Ingresar</a></th>
+						<th colspan="5">
+							<div class="row">
+								<div class="col s6">
+									<a class="waves-effect waves-light btn modal-trigger blue darken-3" href="#modal1">Ingresar</a>
+								</div>
+								<div class="col s6">									
+									<form class="col s12" action="backend.php" method="GET">	
+										<input type="hidden" id="idAccion" name="accion" value="Buscar">
+										<button class="btn waves-effect waves-light cyan darken-3 right" type="submit">Buscar
+											<i class="material-icons right">search</i>
+										</button>							
+										<div class="col s6 right">
+											<input placeholder="Buscar" name="txtBuscar" id="idBuscar" type="text" value="">
+										</div>
+									</form>
+								</div>
+							</div>
+						</th>
 					</tr>
 					<tr class="blue darken-3">
 						<th>#Id Registro</th>
@@ -272,27 +303,28 @@ $listaAutores = $objAutores->listarAutores($arrayFiltros);
 ?>
 					<tr>
 						<td colspan="6">
+							<span class="right"><?=$totalAutores?></span>
 							<ul class="pagination right">
 								<li class="waves-effect">
-									<a href="backend.php?pag=<?=$PAGINAANTERIOR?>"><i class="material-icons">chevron_left</i></a>
+									<a href="backend.php?pag=<?=$PAGINAANTERIOR?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><i class="material-icons">chevron_left</i></a>
 								</li>
-								<li class="active">
-									<a href="#!">1</a>
-								</li>
+<?php
+								for($i = 0; $i < $limitPagina ; $i++){
+
+									$colorear = "waves-effect";
+									if($i == $PAGINA){
+										$colorear = "active";
+									}
+?>
+										<li class="<?=$colorear?>">
+											<a href="backend.php?pag=<?=$i?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><?=$i?></a>
+										</li>
+<?php 								
+								}
+?>
+
 								<li class="waves-effect">
-									<a href="#!">2</a>
-								</li>
-								<li class="waves-effect">
-									<a href="#!">3</a>
-								</li>
-								<li class="waves-effect">
-									<a href="#!">4</a>
-								</li>
-								<li class="waves-effect">
-									<a href="#!">5</a>
-								</li>
-								<li class="waves-effect">
-									<a href="backend.php?pag=<?=$PAGINASIGUENTE?>">
+									<a href="backend.php?pag=<?=$PAGINASIGUENTE?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>">
 										<i class="material-icons">chevron_right</i>
 									</a>
 								</li>

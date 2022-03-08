@@ -124,7 +124,6 @@ class autores extends generico{
 		
 		//$varSQL = 'SELECT * FROM autores';
 
-
 		// Evaluo si existe en el array que recibo la clave pagina en caso contrario pongo por defecto 0.
 		if(isset($filtos['pagina']) && $filtos['pagina'] != "" ){			
 			$pagina = $filtos['pagina'];
@@ -137,17 +136,43 @@ class autores extends generico{
 		}else{
 			$limite = 5;
 		}
-
 		//      SELECT * FROM autores LIMIT 0,10; 
 		$puntoSalida = $pagina * $limite;
-		$varSQL = "SELECT * FROM autores ORDER BY nombre LIMIT ".$puntoSalida.",".$limite."";
 
+		$buscador = "";
+		if(isset($filtos['buscar']) && $filtos['buscar'] != "" ){
+		
+			$buscador = ' WHERE nombre LIKE "%'.$filtos['buscar'].'%" ';
+		
+		}
 
+		$varSQL = "SELECT * FROM autores ".$buscador."  ORDER BY nombre LIMIT ".$puntoSalida.",".$limite."";
 
 		$retorno = $this->traerListado($varSQL, array());
 		return $retorno;
 
 	}
+
+	public function totalAutores($filtos = array()){
+		
+		$buscador = "";
+		if(isset($filtos['buscar']) && $filtos['buscar'] != "" ){
+		
+			$buscador = ' WHERE nombre LIKE "%'.$filtos['buscar'].'%" ';
+		
+		}
+
+		$varSQL = 'SELECT count(1) AS totalRegistros FROM autores '.$buscador.'';
+
+		$respuesta = $this->traerListado($varSQL, array());
+		$retorno = $respuesta[0]['totalRegistros'];
+
+		return $retorno;
+
+	}
+
+
+
 
 	public function listarAutoresUruguayos(){
 		
