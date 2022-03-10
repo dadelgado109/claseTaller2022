@@ -25,7 +25,7 @@ class usuarios extends generico{
 		$this->email	= $this->chequeadorConstructor($arrayDatos, 'email', ''); 
 		$this->clave	= $this->chequeadorConstructor($arrayDatos, 'descripcion', ''); 
 		$this->perfil	= $this->chequeadorConstructor($arrayDatos, 'perfil', 'Vendedor'); 
-
+		$this->estadoRegistro = $this->chequeadorConstructor($arrayDatos, 'estado', 'Ingresado'); 
 	}
 
 	public function ingresarUsuario(){
@@ -36,7 +36,7 @@ class usuarios extends generico{
 		*/
 		try{
 
-			$varSQL = 'SELECT * FROM usuarios WHERE nombre = :nombre && email = :email;';		
+			$varSQL = 'SELECT * FROM usuarios WHERE nombre = :nombre AND email = :email;';		
 			$arrayUsuario = array('nombre' => $this->nombre, 'email' => $this->email );
 			$respuesta = $this->traerListado($varSQL, $arrayUsuario);
 
@@ -48,7 +48,7 @@ class usuarios extends generico{
 			}
 
 			$fecha = date("Y-m-d h:i:s");
-			$sql = "INSERT INTO usuario SET
+			$sql = "INSERT INTO usuarios SET
 						nombre			= :nombre,
 						email  			= :email,
 						clave			= :clave,
@@ -87,12 +87,12 @@ class usuarios extends generico{
 
 	public function traerUsuario($idRegistro){
 		
-		$varSQL 	= 'SELECT * FROM usaurio WHERE idUsuario = :idUsuario;';
+		$varSQL 	= 'SELECT * FROM usuarios WHERE idUsuario = :idUsuario;';
 		$arrayUsuario = array('idUsuario' => $idRegistro);
 
 		$respuesta = $this->traerListado($varSQL, $arrayUsuario);
 
-		$this->idRegistro 		= $respuesta[0]['idGenero'];
+		$this->idRegistro 		= $respuesta[0]['idUsuario'];
 		$this->nombre			= $respuesta[0]['nombre'];
 		$this->email			= $respuesta[0]['email'];
 		$this->clave			= $respuesta[0]['clave'];
@@ -107,21 +107,22 @@ class usuarios extends generico{
 		
 		$fecha = date("Y-m-d h:i:s");
 
-		$sql = "UPDATE usuario SET
+		$sql = "UPDATE usuarios SET
 					nombre			= :nombre,
 					email  			= :email,
 					clave			= :clave,
 					perfil			= :perfil,
-					estadoRegistro	= :estadoRegistro,
+					estadoRegistro	= :estado,
 					fechaEdicion	= :fechaEdicion,
-					historial 		= '';
+					historial 		= ''
 				WHERE idUsuario = :idUsuario;
 			";
+
 
 		$arrayGenero = array(
 			"nombre"		=>	$this->nombre,
 			"email" 		=>  $this->email,
-			"clave"			=>	$clave,				
+			"clave"			=>	$this->clave,				
 			"perfil"		=>	$this->perfil,
 			"estado"		=>	$this->estadoRegistro,
 			"fechaEdicion"	=>  $fecha,
@@ -139,7 +140,7 @@ class usuarios extends generico{
 	}//guardarUsuario
 
 
-	public function listarGenero($filtos = array()){
+	public function listarUsuarios($filtos = array()){
 		
 		//$varSQL = 'SELECT * FROM autores';
 
@@ -170,8 +171,8 @@ class usuarios extends generico{
 		$retorno = $this->traerListado($varSQL, array());
 		return $retorno;
 
-	}//listarGenero
-
+	}//listarUsuarios
+	
 	public function totalUsuarios($filtos = array()){
 		
 		$buscador = "";
@@ -184,6 +185,16 @@ class usuarios extends generico{
 		$varSQL = 'SELECT count(1) AS totalRegistros FROM usuarios '.$buscador.'';
 		$respuesta = $this->traerListado($varSQL, array());
 		$retorno = $respuesta[0]['totalRegistros'];
+
+		return $retorno;
+
+	}//totalUsuarios
+
+	public function listarPerfiles(){
+		
+		//enum('Administrador','Supervisor','Vendedor')
+		
+		$retorno = ["Administrador"=>"Admistrador","Supervisor"=>"Supervisor","Vendedor"=>"Vendedor"];
 
 		return $retorno;
 
