@@ -146,7 +146,7 @@ class autores extends generico{
 		
 		}
 
-		$varSQL = "SELECT * FROM autores ".$buscador."  ORDER BY nombre LIMIT ".$puntoSalida.",".$limite."";
+		$varSQL = "SELECT * FROM autores ".$buscador."  ORDER BY idAutor DESC LIMIT ".$puntoSalida.",".$limite."";
 
 		$retorno = $this->traerListado($varSQL, array());
 		return $retorno;

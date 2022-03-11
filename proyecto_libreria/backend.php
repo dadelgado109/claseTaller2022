@@ -1,126 +1,49 @@
 <?PHP
 
-require_once("modelos/autores.php");
+require_once("modelos/usuarios.php");
 
-$objAutores = new autores();
 
-$respuesta = "";
+if(isset($_GET['cerrar']) && $_GET['cerrar'] == "ok"){
 
-if(isset($_POST['accion']) && $_POST['accion'] == "Ingresar"){
-
-	$nombre = $_POST['txtNombre'];
-	$pais 	= $_POST['txtPais'];
+	@session_start();
+	unset($_SESSION['nombre']);
+	@session_destroy();
 	
-	$datos = [
-			'idRegistro'	=>'', 
-			'estadoRegistro'=>'', 
-			'nombre'		=> $nombre, 
-			'pais'			=> $pais];
-
-	$objAutores->constructor($datos);
-	$respuesta = $objAutores->ingresarAutor();
-
-}
-
-if(isset($_POST['accion']) && $_POST['accion'] == "Eliminar"){
-	
-	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
-		$idRegistro = $_POST['idRegistro'];		
-		$objAutores->traerAutor($idRegistro);
-	}
-	
-}
-
-if(isset($_POST['accion']) && $_POST['accion'] == "ConfirmarEliminar"){
-	
-	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
-
-		$idRegistro = $_POST['idRegistro'];
-		
-		$objAutores->traerAutor($idRegistro);
-		$objAutores->modificarEstadoBorrado();
-		$respuesta = $objAutores->guardarAutor();
-
-	}
-}
-
-
-
-if(isset($_POST['accion']) && $_POST['accion'] == "Editar"){
-	
-	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
-
-		$idRegistro = $_POST['idRegistro'];		
-		$objAutores->traerAutor($idRegistro);
-
-	}
-}
-
-
-if(isset($_POST['accion']) && $_POST['accion'] == "Guardar"){
-	
-	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
-
-		$idRegistro = $_POST['idRegistro'];		
-		$nombre 	= $_POST['txtNombre'];
-		$pais 		= $_POST['txtPais'];
-
-		$objAutores->traerAutor($idRegistro);
-		$objAutores->nombre = $nombre;
-		$objAutores->pais 	= $pais ;
-
-		if(isset($_POST['eliminar']) && $_POST['eliminar'] == "ok" ){
-			$objAutores->modificarEstadoBorrado();
-		}
-		$respuesta = $objAutores->guardarAutor();
-
-	}
-}
-
-$arrayFiltros = [];
-$BUSCAR = "";
-
-if(isset($_GET['accion']) && $_GET['accion'] == "Buscar"){
-
-	if(isset($_GET['txtBuscar']) && $_GET['txtBuscar'] != ""){
-
-		$arrayFiltros['buscar'] = $_GET['txtBuscar'];
-		$BUSCAR 				= $_GET['txtBuscar'];
-	}
-}
-
-
-$totalAutores = $objAutores->totalAutores($arrayFiltros);
-
-if(isset($_GET['pag'])){
-
-	$PAGINA = $_GET['pag'];
-
-	if($PAGINA == "" || $PAGINA <= 0){
-		$PAGINA = 0;
-		$PAGINAANTERIOR = $PAGINA;	
-	}else{
-		$PAGINAANTERIOR = $PAGINA - 1;	
-	}
-
-	$limitPagina = $totalAutores / 5;
-	if($limitPagina <= ($PAGINA+1) ){
-		$PAGINASIGUENTE = $PAGINA;
-	}else{
-		$PAGINASIGUENTE = $PAGINA + 1;		
-	}
-	$arrayFiltros['pagina'] = $PAGINA;
-
 }else{
 
-	$PAGINA = 0;
-	$PAGINASIGUENTE = $PAGINA + 1;
-	$PAGINAANTERIOR = $PAGINA;
-	$limitPagina = $totalAutores / 5;
+	@session_start();
+
+	if(isset($_GET['sec'])){
+
+		$_SESSION['seccion'] = $_GET['sec'];
+
+	}else{
+
+		$_SESSION['seccion'] = "principal";
+	}
+	
 
 }
 
-$listaAutores = $objAutores->listarAutores($arrayFiltros);
+$objUsuarios = new usuarios();
+$respuesta = "";
+
+if(isset($_POST['accion']) && $_POST['accion'] == "Login"){
+
+	$email = $_POST['txtEmail'];
+	$clave 	= $_POST['txtClave'];
+	
+	$respuesta = $objUsuarios->login($email, $clave);
+
+	if(isset($respuesta[0]['nombre'])){
+		@session_start();
+		$_SESSION['nombre'] = $respuesta[0]['nombre'];
+		$_SESSION['fecha'] 	= date("Y-m-d H:i:s");
+
+	}
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -141,12 +64,12 @@ $listaAutores = $objAutores->listarAutores($arrayFiltros);
 			<nav class="blue darken-4" role="navigation">
 				<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
 					<ul class="right hide-on-med-and-down">
-						<li><a href="#">Usuarios</a></li>
-						<li><a href="#">Clientes</a></li>
-						<li><a href="#">Autores</a></li>
-						<li><a href="#">Libros</a></li>
-						<li><a href="#">Generos</a></li>
-						<li><a href="#">Ventas</a></li>
+						<li><a href="backend.php?sec=usu">Usuarios</a></li>
+						<li><a href="backend.php?sec=cli">Clientes</a></li>
+						<li><a href="backend.php?sec=aut">Autores</a></li>
+						<li><a href="backend.php?sec=lib">Libros</a></li>
+						<li><a href="backend.php?sec=gen">Generos</a></li>
+						<li><a href="backend.php?sec=vet">Ventas</a></li>
 						<li>	
 						<a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Yo</a>
 							<!-- Dropdown Structure -->
@@ -156,7 +79,12 @@ $listaAutores = $objAutores->listarAutores($arrayFiltros);
 								<li class="divider" tabindex="-1"></li>
 								<li><a href="#!">three</a></li>
 								<li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-								<li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+								<li>
+									<a href="backend.php?cerrar=ok">
+										<i class="material-icons">cloud</i>
+										Cerrar
+									</a>
+								</li>
 							</ul>					
 						</li>
 						
@@ -173,213 +101,68 @@ $listaAutores = $objAutores->listarAutores($arrayFiltros);
 				</div>
 			</nav>
 		</div>
-		<div class="section no-pad-bot" id="index-banner">
-			<div class="container">
-			<br><br>
-			<h1 class="header center orange-text">Listado Autores</h1>			
-				<br>
-				<br>
-<?PHP	
-				if($respuesta != ""){
-					
-					echo('
-						<nav>
-							<div class="nav-wrapper center">'.
-								$respuesta				
-							.'</div>
-						</nav>
-					');
-				}
-?>
-
-			</div>
-		</div>
-
+		
 
 		<div class="container">
-
+			
 <?php
-	if(isset($_POST['accion']) && $_POST['accion'] == "Eliminar" && isset($_POST['idRegistro']) && $_POST['idRegistro'] != ""){
+		if(!isset($_SESSION['nombre'])){
 ?>
-			<div class="row red lighten-5">
-				<form class="col s12" action="backend.php" method="POST">
-					<div class="input-field col s12">
-						<h3>Eliminar el autor:<?=$objAutores->nombre?>?</h3>
-					</div>					
-					<input type="hidden" id="idAccion" name="accion" value="ConfirmarEliminar">
-					<input type="hidden" id="idRegistro" name="idRegistro" value="<?=$objAutores->obtenerIdRegistro()?>">
-					<button class="btn waves-effect waves-light red darken-3" type="submit">Eliminar
-						<i class="material-icons right">delete_forever</i>
-					</button>	
-				</form>
-			</div>	
-<?php
-	}
-?>
-<?php
-	if(isset($_POST['accion']) && $_POST['accion'] == "Editar" && isset($_POST['idRegistro']) && $_POST['idRegistro'] != ""){
-?>
+			<div class="section no-pad-bot" id="index-banner">
+				<br><br>
+				<h1 class="header center orange-text">Administrador </h1>			
+				<br>
+				<br>
+			</div>
 			<div class="row">
-				<form class="col s12" action="backend.php" method="POST">
-					<div class="input-field col s12">
-						<h3>Ingresar Autores</h3>
-					</div>
-					<div class="input-field col s12">
-						<input placeholder="Nombre Autor" name="txtNombre" id="first_name" type="text" class="validate" value="<?=$objAutores->nombre?>">
-						<label for="first_name">Nombre</label>
-					</div>
-					<div class="input-field col s12">
-						<input placeholder="Pais Autor" name="txtPais" id="first_name" type="text" class="validate" value="<?=$objAutores->pais?>">
-						<label for="first_name">Pais</label>
-					</div>
-
-					<div class="input-field col s12">
-						<div class="switch">
-							<label>
-							Activado
-							<input type="checkbox" name="eliminar" value="ok">
-							<span class="lever"></span>
-							Eliminar
-							</label>
-						</div>
-					</div>
-
-					<input type="hidden" id="idAccion" name="accion" value="Guardar">
-					<input type="hidden" id="idRegistro" name="idRegistro" value="<?=$objAutores->obtenerIdRegistro()?>">
-					<button class="btn waves-effect waves-light cyan darken-3" type="submit">Guardar
-						<i class="material-icons right">send</i>
-					</button>	
-				</form>
-			</div>	
-<?php
-	}
-?>
-
-			<table class="striped">
-				<thead>
-					<tr class="blue darken-3">
-						<th colspan="5">
-							<div class="row">
-								<div class="col s6">
-									<a class="waves-effect waves-light btn modal-trigger blue darken-3" href="#modal1">Ingresar</a>
-								</div>
-								<div class="col s6">									
-									<form class="col s12" action="backend.php" method="GET">	
-										<input type="hidden" id="idAccion" name="accion" value="Buscar">
-										<button class="btn waves-effect waves-light cyan darken-3 right" type="submit">Buscar
-											<i class="material-icons right">search</i>
-										</button>							
-										<div class="col s6 right">
-											<input placeholder="Buscar" name="txtBuscar" id="idBuscar" type="text" value="">
-										</div>
-									</form>
-								</div>
-							</div>
-						</th>
-					</tr>
-					<tr class="blue darken-3">
-						<th>#Id Registro</th>
-						<th>Nombre</th>
-						<th>País</th>
-						<th>Estado</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-<?php
-				foreach($listaAutores as $autores){
-?>
-					<tr>
-						<td><?=$autores['idAutor']?></td>	
-						<td><?=$autores['nombre']?></td>
-						<td><?=$autores['pais']?></td>
-						<td><?=$autores['estadoRegistro']?></td>
-						<td>
-							<form action="backend.php" method="POST">
-								<input type="hidden" name="accion" value="Eliminar">
-								<input type="hidden" name="idRegistro" value="<?=$autores['idAutor']?>">
-								<button class="btn-floating waves-effect waves-light red darken-3" type="submit" name="action">
-									<i class="material-icons right">delete_forever</i>
-								</button>
-							</form>
-							<form action="backend.php" method="POST">
-								<input type="hidden" name="accion" value="Editar">
-								<input type="hidden" name="idRegistro" value="<?=$autores['idAutor']?>">
-								<button class="btn-floating waves-effect waves-light green darken-3" type="submit" name="action">
-									<i class="material-icons right">edit</i>
-								</button>
-							</form>
-						</td>
-						
-					</tr>					
-<?php
-				}
-?>
-					<tr>
-						<td colspan="6">
-							<span class="right"><?=$totalAutores?></span>
-							<ul class="pagination right">
-								<li class="waves-effect">
-									<a href="backend.php?pag=<?=$PAGINAANTERIOR?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><i class="material-icons">chevron_left</i></a>
-								</li>
-<?php
-								for($i = 0; $i < $limitPagina ; $i++){
-
-									$colorear = "waves-effect";
-									if($i == $PAGINA){
-										$colorear = "active";
-									}
-?>
-										<li class="<?=$colorear?>">
-											<a href="backend.php?pag=<?=$i?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><?=$i?></a>
-										</li>
-<?php 								
-								}
-?>
-
-								<li class="waves-effect">
-									<a href="backend.php?pag=<?=$PAGINASIGUENTE?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>">
-										<i class="material-icons">chevron_right</i>
-									</a>
-								</li>
-							</ul>
-						</td>
-					</tr>
-
-				</tbody>
-			</table>
-			<br><br>
-		</div>
-
-
-		  <!-- Modal Structure -->
-		 <div id="modal1" class="modal">
-			<div class="modal-content">				
-				<div class="row">
-					<form class="col s12" action="backend.php" method="POST">
+				<form class="col s12" method="POST" action="backend.php">
+			 		<div class="row">
 						<div class="input-field col s12">
-							<h3>Ingresar Autores</h3>
+							<input name="txtEmail" id="email" type="email" class="validate">
+							<label for="email">Email</label>
 						</div>
+					</div>	
+					<div class="row">
 						<div class="input-field col s12">
-							<input placeholder="Nombre Autor" name="txtNombre" id="first_name" type="text" class="validate">
-							<label for="first_name">Nombre</label>
-						</div>
-						<div class="input-field col s12">
-							<input placeholder="Pais Autor" name="txtPais" id="first_name" type="text" class="validate">
-							<label for="first_name">Pais</label>
-						</div>
-						<input type="hidden" id="idAccion" name="accion" value="Ingresar" >
-						<button class="btn waves-effect waves-light cyan darken-3" type="submit">Enviar
+							<input name="txtClave" id="password" type="password" class="validate">
+							<label for="password">Password</label>
+			 			</div>
+					</div>			 
+					<div>
+						<input type="hidden" id="idAccion" name="accion" value="Login" >
+						<button class="btn waves-effect waves-light cyan darken-3" type="submit">Entrar
 							<i class="material-icons right">send</i>
 						</button>	
-					</form>
-				</div>
-			</div>
-			<div class="modal-footer blue darken-4">
-				<a href="#!" class="modal-close waves-effect waves-green btn-flat  white-text">Cancelar</a>
-			</div>
-		</div>
+					</div>     	
+				</form>			
+			</div>	
+<?php
+		}else{
 
+			if($_SESSION['seccion'] == "aut"){
+
+				include("backend/vistas/vista_autores.php");
+
+			}elseif($_SESSION['seccion'] == "gen"){				
+
+				include("backend/vistas/vista_genero.php");
+
+			}elseif($_SESSION['seccion'] == "usu"){				
+
+				include("backend/vistas/vista_usuarios.php");
+
+			}else{
+?>
+				<h1 class="header center orange-text">Hola <?=$_SESSION['nombre']?> </h1>
+<?PHP 
+			}	
+		}
+?>
+
+
+
+		</div>
+		<!-- CIERRO CONTAINER -->
 		<br><br><br><br>
 		<br><br><br><br>
 		<br><br><br><br>

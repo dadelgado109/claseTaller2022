@@ -200,6 +200,30 @@ class usuarios extends generico{
 
 	}//totalUsuarios
 
+	public function login($email, $clave){
+		
+		//enum('Administrador','Supervisor','Vendedor')
+		$retorno = "";
+		$claMD5 = md5($clave);	
+
+		$varSQL 	= 'SELECT * FROM usuarios WHERE email = :email AND clave = :clave ;';
+		$arrayUsu 	= array('email' => $email, 'clave' => $claMD5);
+
+		
+		$respuesta = $this->traerListado($varSQL, $arrayUsu);
+
+		if(empty($respuesta)){
+			/*
+				En caso que tenga registro entro aca y devuelvo que ya ese autor esta ingresado
+			*/
+			return "Error en las credenciales";
+		}
+
+		return $respuesta;
+
+	}//totalUsuarios
+
+
 
 }
 
