@@ -168,6 +168,17 @@ class genero extends generico{
 
 	}//totalGenero
 
+	public function listaSelectGenero($filtos = array()){
+		
+		$buscador = "";
+
+		$varSQL = 'SELECT idGenero, nombre FROM genero WHERE estadoRegistro != "Borrado" ';
+		$retorno = $this->traerListado($varSQL, array());
+		
+		return $retorno;
+
+	}//totalGenero
+
 
 }
 

@@ -19,7 +19,9 @@ if(isset($_GET['cerrar']) && $_GET['cerrar'] == "ok"){
 
 	}else{
 
-		$_SESSION['seccion'] = "principal";
+		if($_SESSION['seccion'] == ""){
+			$_SESSION['seccion'] = "principal";
+		}
 	}
 	
 
@@ -150,6 +152,10 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Login"){
 			}elseif($_SESSION['seccion'] == "usu"){				
 
 				include("backend/vistas/vista_usuarios.php");
+
+			}elseif($_SESSION['seccion'] == "lib"){				
+
+				include("backend/vistas/vista_libros.php");
 
 			}else{
 ?>
