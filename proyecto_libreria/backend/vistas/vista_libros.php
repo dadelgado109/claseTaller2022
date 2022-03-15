@@ -10,13 +10,26 @@ $respuesta = "";
 
 if(isset($_POST['accion']) && $_POST['accion'] == "Ingresar"){
 
+	$imagen 	= "";
+
+	if( isset($_FILES['txtImagen']['name']) ){
+		$ruta = "Imagenes/libros/".$_FILES['txtImagen']['name'];
+	
+		if(copy($_FILES['txtImagen']['tmp_name'], $ruta)){
+			
+			$imagen 	= $_FILES['txtImagen']['name'];
+
+		}else{
+			print_r("Dio Error al subir la imagen");
+			die();
+		}
+	}
+	
 	$nombre 	= $_POST['txtNombre'];
 	$editorial	= $_POST['txtEditorial'];
-	$imagen 	= $_POST['txtImagen'];
 	$resenia 	= $_POST['txtResenia'];
 	$isbn	 	= $_POST['txtIsbn'];
 	$idGenero 	= $_POST['selIdGenero'];
-
 	$datos = [
 			'idRegistro'	=>'', 
 			'estadoRegistro'=>'', 
@@ -30,7 +43,7 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Ingresar"){
 
 	$objLibros->constructor($datos);
 	$respuesta = $objLibros->ingresarLibros();
-
+	
 }
 
 if(isset($_POST['accion']) && $_POST['accion'] == "Eliminar"){
@@ -136,6 +149,7 @@ $listaLibros = $objLibros->listarLibros($arrayFiltros);
 $listaSelectGenero = $objGenero->listaSelectGenero(array());
 
 
+
 ?>
 
 	<div class="section no-pad-bot" id="index-banner">
@@ -229,7 +243,7 @@ $listaSelectGenero = $objGenero->listaSelectGenero(array());
 									<a class="waves-effect waves-light btn modal-trigger blue darken-3" href="#modal1">Ingresar</a>
 								</div>
 								<div class="col s6">									
-									<form class="col s12" action="backend_usuarios.php" method="GET">	
+									<form class="col s12" action="backend.php" method="GET">	
 										<input type="hidden" id="idAccion" name="accion" value="Buscar">
 										<button class="btn waves-effect waves-light cyan darken-3 right" type="submit">Buscar
 											<i class="material-icons right">search</i>
@@ -249,6 +263,7 @@ $listaSelectGenero = $objGenero->listaSelectGenero(array());
 						<th>Editoriales</th>
 						<th>Perfil</th>
 						<th>precio</th>
+						<th>Imagen</th>
 						<th>Acciones</th>
 					</tr>
 				</thead>
@@ -263,6 +278,9 @@ $listaSelectGenero = $objGenero->listaSelectGenero(array());
 						<td><?=$libros['editoriales']?></td>
 						<td><?=$libros['precio']?></td>
 						<td><?=$libros['estadoRegistro']?></td>
+						<td>
+							<img src="Imagenes/libros/<?=$libros['imagen']?>"; width="50px"  >
+						</td>
 						<td>
 							<form action="backend.php" method="POST">
 								<input type="hidden" name="accion" value="Eliminar">
@@ -289,7 +307,7 @@ $listaSelectGenero = $objGenero->listaSelectGenero(array());
 							<span class="right"><?=$totalRegistros?></span>
 							<ul class="pagination right">
 								<li class="waves-effect">
-									<a href="backend_genero.php?pag=<?=$PAGINAANTERIOR?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><i class="material-icons">chevron_left</i></a>
+									<a href="backend.php?pag=<?=$PAGINAANTERIOR?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><i class="material-icons">chevron_left</i></a>
 								</li>
 <?php
 								for($i = 0; $i < $limitPagina ; $i++){
@@ -300,14 +318,14 @@ $listaSelectGenero = $objGenero->listaSelectGenero(array());
 									}
 ?>
 										<li class="<?=$colorear?>">
-											<a href="backend_genero.php?pag=<?=$i?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><?=$i?></a>
+											<a href="backend.php?pag=<?=$i?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><?=$i?></a>
 										</li>
 <?php 								
 								}
 ?>
 
 								<li class="waves-effect">
-									<a href="backend_genero.php?pag=<?=$PAGINASIGUENTE?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>">
+									<a href="backend.php?pag=<?=$PAGINASIGUENTE?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>">
 										<i class="material-icons">chevron_right</i>
 									</a>
 								</li>
@@ -324,7 +342,7 @@ $listaSelectGenero = $objGenero->listaSelectGenero(array());
 		 <div id="modal1" class="modal">
 			<div class="modal-content">				
 				<div class="row">
-					<form class="col s12" action="backend.php" method="POST">
+					<form class="col s12" action="backend.php" method="POST" enctype='multipart/form-data'>
 						<div class="input-field col s12">
 							<h3>Ingresar Libros</h3>
 						</div>
@@ -336,10 +354,22 @@ $listaSelectGenero = $objGenero->listaSelectGenero(array());
 							<input placeholder="Editorial" name="txtEditorial" id="first_name" type="text" class="validate">
 							<label for="first_name">Editorial</label>
 						</div>
+						<!--
 						<div class="input-field col s12">
 							<input placeholder="imagen" name="txtImagen" id="first_name" type="text" class="validate">
 							<label for="first_name">imagen</label>
 						</div>
+							-->
+						<div class="file-field input-field col s12">
+				    		<div class="btn">
+								<span>Archivo</span>
+								<input type="file" name="txtImagen" placeholder="imagen">
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text">
+							</div>
+					    </div>
+
 						<div class="input-field col s12">
 							<input placeholder="Reseña" name="txtResenia" id="first_name" type="text" class="validate">
 							<label for="first_name">Reseña</label>
