@@ -165,8 +165,6 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Login"){
 		}
 ?>
 
-
-
 		</div>
 		<!-- CIERRO CONTAINER -->
 		<br><br><br><br>

@@ -1,18 +1,31 @@
 
 <?php
 
-
+require_once("modelos/genero.php");
 
 echo("Hola Soy un cron:");
 
-print_r($_SERVER['argv'][1]);
+$accion = "";
 
-require_once("modelos/genero.php");
+if(isset($_SERVER['argv'][1])){
+	print_r($_SERVER['argv'][1]);
+}
+echo("\n");
+if(isset($_SERVER['argv'][2])){
+	print_r($_SERVER['argv'][2]);
+}
 
+if(isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == "Instalacion"){
+	include("consola/instalador.php");
+}
+
+/*
 $objGenero = new genero();
-$lista = $objGenero->listarGenero([]);
+$arrayFiltros = array();
+$listaGeneros = $objGenero->listarGenero($arrayFiltros);
+print_r($listaGeneros);
+*/
 
-print_r($lista);
 
 
 
