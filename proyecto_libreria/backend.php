@@ -19,13 +19,19 @@ if(isset($_GET['cerrar']) && $_GET['cerrar'] == "ok"){
 
 	}else{
 
-		if($_SESSION['seccion'] == ""){
+		if(isset($_SESSION['seccion']) && $_SESSION['seccion'] == ""){
 			$_SESSION['seccion'] = "principal";
 		}
 	}
-	
+}
+
+if(isset($_SESSION['nombre'])){
+
+}else{
 
 }
+
+
 
 $objUsuarios = new usuarios();
 $respuesta = "";
@@ -41,6 +47,7 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Login"){
 		@session_start();
 		$_SESSION['nombre'] = $respuesta[0]['nombre'];
 		$_SESSION['fecha'] 	= date("Y-m-d H:i:s");
+		$_SESSION['perfil'] = $respuesta[0]['perfil'];
 
 	}
 }
@@ -143,19 +150,64 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Login"){
 
 			if($_SESSION['seccion'] == "aut"){
 
-				include("backend/vistas/vista_autores.php");
+				// Valido los permisos de los usuarios 
+				if($_SESSION['perfil'] == "Administrador" || $_SESSION['perfil'] == "Supervisor" || $_SESSION['perfil'] == "Vendedor"  ){		
+					
+					
+					include("backend/vistas/vista_autores.php");
+				}				
 
 			}elseif($_SESSION['seccion'] == "gen"){				
 
-				include("backend/vistas/vista_genero.php");
+				// Valido los permisos de los usuarios 
+				if($_SESSION['perfil'] == "Administrador" || $_SESSION['perfil'] == "Supervisor" ){
+					include("backend/vistas/vista_genero.php");
+				
+				}else{
+?>
+					<div class="section no-pad-bot" id="index-banner">
+						<br><br>
+						<h1 class="header center orange-text">Usted no tiene permiso en esta seccion </h1>			
+						<br>
+						<br>
+					</div>
+<?PHP
+		
+				}
 
 			}elseif($_SESSION['seccion'] == "usu"){				
 
-				include("backend/vistas/vista_usuarios.php");
+				// Valido los permisos de los usuarios 
+				if($_SESSION['perfil'] == "Administrador" ){
+
+					include("backend/vistas/vista_usuarios.php");
+
+				}else{
+?>
+					<div class="section no-pad-bot" id="index-banner">
+						<br><br>
+						<h1 class="header center orange-text">Usted no tiene permiso en esta seccion </h1>			
+						<br>
+						<br>
+					</div>
+
+<?PHP							
+				}
 
 			}elseif($_SESSION['seccion'] == "lib"){				
 
-				include("backend/vistas/vista_libros.php");
+				// Valido los permisos de los usuarios 
+				if($_SESSION['perfil'] == "Administrador" || $_SESSION['perfil'] == "Supervisor" || $_SESSION['perfil'] == "Vendedor" ){
+					include("backend/vistas/vista_libros.php");
+				}
+
+
+			}elseif($_SESSION['seccion'] == "cli"){				
+
+				// Valido los permisos de los usuarios 
+				if($_SESSION['perfil'] == "Administrador" || $_SESSION['perfil'] == "Supervisor" || $_SESSION['perfil'] == "Vendedor" ){
+					include("backend/vistas/vista_clientes.php");
+				}
 
 			}else{
 ?>

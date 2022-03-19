@@ -23,7 +23,7 @@ class usuarios extends generico{
 		parent::constructor($arrayDatos);
 		$this->nombre 	= $this->chequeadorConstructor($arrayDatos, 'nombre', ''); 
 		$this->email	= $this->chequeadorConstructor($arrayDatos, 'email', ''); 
-		$this->clave	= $this->chequeadorConstructor($arrayDatos, 'descripcion', ''); 
+		$this->clave	= $this->chequeadorConstructor($arrayDatos, 'clave', ''); 
 		$this->perfil	= $this->chequeadorConstructor($arrayDatos, 'perfil', 'Vendedor'); 
 		$this->estadoRegistro = $this->chequeadorConstructor($arrayDatos, 'estado', 'Ingresado'); 
 	}

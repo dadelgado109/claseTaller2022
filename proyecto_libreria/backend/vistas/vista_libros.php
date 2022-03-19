@@ -50,7 +50,7 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Eliminar"){
 	
 	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
 		$idRegistro = $_POST['idRegistro'];		
-		$objLibros->traerLibros($idRegistro);
+		$objLibros->traerLibro($idRegistro);
 	}
 	
 }
@@ -61,7 +61,7 @@ if(isset($_POST['accion']) && $_POST['accion'] == "ConfirmarEliminar"){
 
 		$idRegistro = $_POST['idRegistro'];
 		
-		$objLibros->traerLibros($idRegistro);
+		$objLibros->traerLibro($idRegistro);
 		$objLibros->modificarEstadoBorrado();
 		$respuesta = $objLibros->guardarLibros();
 
@@ -73,7 +73,7 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Editar"){
 	if(isset($_POST['idRegistro']) && $_POST['idRegistro'] != "" ){
 
 		$idRegistro = $_POST['idRegistro'];		
-		$objLibros->traerLibros($idRegistro);
+		$objLibros->traerLibro($idRegistro);
 
 	}
 }

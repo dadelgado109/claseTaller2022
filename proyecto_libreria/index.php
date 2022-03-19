@@ -1,3 +1,21 @@
+<?php
+
+
+
+require_once("modelos/libros.php");
+
+$objLibros = new libros();
+
+$arraFilto = ['limite' => "6"];
+
+$listaRandom = $objLibros->listarLibros($arraFilto);
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -14,11 +32,11 @@
 			<div class="nav-wrapper container">
 			<a id="logo-container" href="#" class="brand-logo">Logo</a>
 			<ul class="right hide-on-med-and-down">
-				<li><a href="#">Navbar Link</a></li>
+				<li><a href="#">Usuarios</a></li>
 			</ul>
 
 			<ul id="nav-mobile" class="sidenav">
-				<li><a href="#">Navbar Link</a></li>
+				<li><a href="#">Usuarios</a></li>
 			</ul>
 			<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 			</div>
@@ -28,53 +46,41 @@
 			<div class="section no-pad-bot">
 				<div class="container">
 					<br><br>
-					<h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
+					<h1 class="header center red-text text-red-2">Mi Libreria</h1>
 					<div class="row center">
-						<h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-					</div>
-					<div class="row center">
-						<a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-					</div>
+						<h5 class="header col s12 light red-text text-red-2">Veni a Leer y vola como en tus sueños</h5>
+					</div>				
 					<br><br>
 				</div>
 			</div>
 			<div class="parallax">
-				<img src="web/imagenes/parallax/background1.jpg" alt="Unsplashed background img 1">
+				<img src="web/imagenes/parallax/parallax_1.jpg" alt="Unsplashed background img 1">
 			</div>
 		</div>
 
 
 		<div class="container">
 			<div class="section">
-			<!--   Icon Section   -->
-			<div class="row">
-				<div class="col s12 m4">
-					<div class="icon-block">
-						<h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
-						<h5 class="center">Speeds up development</h5>
+				<!--   Icon Section   -->
+				<div class="row">
 
-						<p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+<?PHP
+				foreach($listaRandom as $libros){
+?>
+					<div class="col s12 m2">
+						<div class="icon-block">
+							<img src="Imagenes/libros/<?=$libros['imagen']?>" width="120px" height="180" />
+							<h5 class="center"><?=$libros['nombre']?></h5>
+							<p class="light"><?=substr($libros['resenia'], 0, 100)?>...</p>
+						</div>
 					</div>
-					</div>
+<?PHP
+				}
+?>
 
-					<div class="col s12 m4">
-					<div class="icon-block">
-						<h2 class="center brown-text"><i class="material-icons">group</i></h2>
-						<h5 class="center">User Experience Focused</h5>
+				
 
-						<p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-					</div>
-					</div>
-
-					<div class="col s12 m4">
-					<div class="icon-block">
-						<h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-						<h5 class="center">Easy to work with</h5>
-
-						<p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-					</div>
 				</div>
-			</div>
 
 			</div>
 		</div>

@@ -149,7 +149,7 @@ $listaGeneros = $objGenero->listarGenero($arrayFiltros);
 	if(isset($_POST['accion']) && $_POST['accion'] == "Eliminar" && isset($_POST['idRegistro']) && $_POST['idRegistro'] != ""){
 ?>
 			<div class="row red lighten-5">
-				<form class="col s12" action="backend_genero.php" method="POST">
+				<form class="col s12" action="backend.php" method="POST">
 					<div class="input-field col s12">
 						<h3>Eliminar el g&#233;nero:<?=$objGenero->nombre?>?</h3>
 					</div>					
@@ -167,7 +167,7 @@ $listaGeneros = $objGenero->listarGenero($arrayFiltros);
 	if(isset($_POST['accion']) && $_POST['accion'] == "Editar" && isset($_POST['idRegistro']) && $_POST['idRegistro'] != ""){
 ?>
 			<div class="row">
-				<form class="col s12" action="backend_genero.php" method="POST">
+				<form class="col s12" action="backend.php" method="POST">
 					<div class="input-field col s12">
 						<h3>Modificar G&#233;nero</h3>
 					</div>
@@ -211,7 +211,7 @@ $listaGeneros = $objGenero->listarGenero($arrayFiltros);
 									<a class="waves-effect waves-light btn modal-trigger blue darken-3" href="#modal1">Ingresar</a>
 								</div>
 								<div class="col s6">									
-									<form class="col s12" action="backend_genero.php" method="GET">	
+									<form class="col s12" action="backend.php" method="GET">	
 										<input type="hidden" id="idAccion" name="accion" value="Buscar">
 										<button class="btn waves-effect waves-light cyan darken-3 right" type="submit">Buscar
 											<i class="material-icons right">search</i>
@@ -242,14 +242,14 @@ $listaGeneros = $objGenero->listarGenero($arrayFiltros);
 						<td><?=$generos['descripcion']?></td>
 						<td><?=$generos['estadoRegistro']?></td>
 						<td>
-							<form action="backend_genero.php" method="POST">
+							<form action="backend.php" method="POST">
 								<input type="hidden" name="accion" value="Eliminar">
 								<input type="hidden" name="idRegistro" value="<?=$generos['idGenero']?>">
 								<button class="btn-floating waves-effect waves-light red darken-3" type="submit" name="action">
 									<i class="material-icons right">delete_forever</i>
 								</button>
 							</form>
-							<form action="backend_genero.php" method="POST">
+							<form action="backend.php" method="POST">
 								<input type="hidden" name="accion" value="Editar">
 								<input type="hidden" name="idRegistro" value="<?=$generos['idGenero']?>">
 								<button class="btn-floating waves-effect waves-light green darken-3" type="submit" name="action">
@@ -267,7 +267,7 @@ $listaGeneros = $objGenero->listarGenero($arrayFiltros);
 							<span class="right"><?=$totalRegistros?></span>
 							<ul class="pagination right">
 								<li class="waves-effect">
-									<a href="backend_genero.php?pag=<?=$PAGINAANTERIOR?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><i class="material-icons">chevron_left</i></a>
+									<a href="backend.php?pag=<?=$PAGINAANTERIOR?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><i class="material-icons">chevron_left</i></a>
 								</li>
 <?php
 								for($i = 0; $i < $limitPagina ; $i++){
@@ -278,14 +278,14 @@ $listaGeneros = $objGenero->listarGenero($arrayFiltros);
 									}
 ?>
 										<li class="<?=$colorear?>">
-											<a href="backend_genero.php?pag=<?=$i?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><?=$i?></a>
+											<a href="backend.php?pag=<?=$i?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>"><?=$i?></a>
 										</li>
 <?php 								
 								}
 ?>
 
 								<li class="waves-effect">
-									<a href="backend_genero.php?pag=<?=$PAGINASIGUENTE?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>">
+									<a href="backend.php?pag=<?=$PAGINASIGUENTE?>&accion=Buscar&txtBuscar=<?=$BUSCAR?>">
 										<i class="material-icons">chevron_right</i>
 									</a>
 								</li>
@@ -301,7 +301,7 @@ $listaGeneros = $objGenero->listarGenero($arrayFiltros);
 		 <div id="modal1" class="modal">
 			<div class="modal-content">				
 				<div class="row">
-					<form class="col s12" action="backend_genero.php" method="POST">
+					<form class="col s12" action="backend.php" method="POST">
 						<div class="input-field col s12">
 							<h3>Ingresar Género </h3>
 						</div>

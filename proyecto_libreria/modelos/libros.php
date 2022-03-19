@@ -96,7 +96,7 @@ class libros extends generico{
 		}
 
 	}
-
+	
 	public function traerLibro($idRegistro){
 		
 		$varSQL = 'SELECT * FROM libros WHERE idLibro = :idLibro;';
