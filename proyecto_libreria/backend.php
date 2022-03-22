@@ -3,28 +3,21 @@
 require_once("modelos/usuarios.php");
 
 
-if(isset($_GET['cerrar']) && $_GET['cerrar'] == "ok"){
 
-	@session_start();
-	unset($_SESSION['nombre']);
-	@session_destroy();
-	
+
+@session_start();
+
+if(isset($_GET['sec'])){
+
+	$_SESSION['seccion'] = $_GET['sec'];
+
 }else{
 
-	@session_start();
-
-	if(isset($_GET['sec'])){
-
-		$_SESSION['seccion'] = $_GET['sec'];
-
-	}else{
-
-		if(isset($_SESSION['seccion']) && $_SESSION['seccion'] == ""){
-			$_SESSION['seccion'] = "principal";
-		}
+	if(isset($_SESSION['seccion']) && $_SESSION['seccion'] == ""){
+		$_SESSION['seccion'] = "principal";
 	}
 }
-
+	
 if(isset($_SESSION['nombre'])){
 
 }else{
@@ -89,7 +82,7 @@ if(isset($_POST['accion']) && $_POST['accion'] == "Login"){
 								<li><a href="#!">three</a></li>
 								<li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
 								<li>
-									<a href="backend.php?cerrar=ok">
+									<a href="cerrar_bk.php">
 										<i class="material-icons">cloud</i>
 										Cerrar
 									</a>
