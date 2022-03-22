@@ -1,0 +1,12 @@
+{
+    "name": "openm/librerias",
+    "authors": [
+        {
+            "name": "Damian Delgado",
+            "email": "damisintesis109@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.6"
+    }
+}
