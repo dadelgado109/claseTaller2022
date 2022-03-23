@@ -72,7 +72,7 @@ class generico {
 
 		$clave = $ARRAYCONFIGURACION['MySQL']['password'];
 		$user = $ARRAYCONFIGURACION['MySQL']['user'];
-
+		$ARRAYCONFIGURACION['MySQL']['dbName'] = "elProyecto";
 		$conexion = new PDO("mysql:host=".$ARRAYCONFIGURACION['MySQL']['host'].";dbname=".$ARRAYCONFIGURACION['MySQL']['dbName']."",$user,$clave);
 
 		$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
